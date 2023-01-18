@@ -167,7 +167,6 @@ section {
   scroll-margin-top: 2rem;
   font-size: 1.1rem;
   line-height: 1.4;
-  overflow: hidden;
 }
 section > * {
   max-width: 81ch;
