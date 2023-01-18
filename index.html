@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Проблемы теоретической и экспериментальной химии</title>
+  <meta name="description" content="Российская молодёжная научная конференция с международным участием 
+  «Проблемы теоретической и экспериментальной химии» проводится ежегодно на базе Института естественных наук и математики УрФУ">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+  <link rel="manifest" href="./site.webmanifest">
+
+  <meta property="og:title" content="Проблемы теоретической и экспериментальной химии" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://conferenceusu.github.io" />
+  <meta property="og:image" content="./android-chrome-512x512.png" />
+  <meta property="og:image:width" content="512" />
+  <meta property="og:image:height" content="512" />
+  <meta property="og:image" content="./android-chrome-192x192.png" />
+  <meta property="og:image:width" content="192" />
+  <meta property="og:image:height" content="192" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta property="og:description" content="Российская молодёжная научная конференция с международным участием 
+  «Проблемы теоретической и экспериментальной химии» проводится ежегодно на базе Института естественных наук и математики УрФУ" />
+
+  <link rel="stylesheet" href="./css/normalize.css">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="./shariff/shariff.complete.css">
+  <script src="./shariff/shariff.complete.js" defer></script>
+
+  <link rel="stylesheet" href="./css/main.css">
+
+  <script>
+    'use strict';
+    document.addEventListener('DOMContentLoaded', () => {
+      //get date for the calendar
+      const monthClasses = ['january', 'february', 'march', 'april'];
+      const numberClass = 'calendar__number';
+      const numberTodayClass = 'calendar__number--current';
+      const today = new Date();
+      const mm = today.getMonth();
+      const dd = today.getDate();
+      const dateSelector = `.${monthClasses[mm]} .${numberClass}`;
+      console.log(dateSelector);
+      const monthNodes = document.querySelectorAll(dateSelector);
+      if (monthNodes) {
+        const monthNode = monthNodes[dd - 1];
+        if (monthNode) {
+          monthNode.classList.add(numberTodayClass);
+        }
+      }
+    }, {once: true});
+    </script>
+</head>
+
+<body>
+  <header>
+    <div class="logo-wrap">
+      <img class="header-img insma-logo" height="128" width="300" alt="insma-logo" src="./img/insmalogo.png">
+      <img class="header-img conf-logo" height="128" width="128" alt="conf-logo" src="./img/XXXIIIlogotransparent.png">
+    </div>
+    <h1>XXXIII Российская молодёжная научная конференция с международным участием «Проблемы теоретической и экспериментальной химии»</h1>
+  </header>
+
+  <nav id="nav-bar">
+    <ul>
+      <li><a class="nav-link" href="#">Информация</a></li>
+      <li><a class="nav-link" href="#dates">Даты</a></li>
+      <li><a class="nav-link" href="#register">Регистрация и оргвзнос</a></li>
+      <li><a class="nav-link" href="#abstracts">Оформление тезисов</a></li>
+      <li><a class="nav-link" href="#committee">Оргкомитет</a></li>
+      <li><a class="nav-link" href="#archive">Архив</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="info">
+      <h2>Общая информация</h2>
+      <div class="info-item">
+        <span class="material-icons">info</span>
+        <p>Уважаемые коллеги! Приглашаем вас принять участие в XXXIII Российской молодёжной научной конференции с международным участием «Проблемы теоретической и экспериментальной химии», посвященной 100-летию со дня рождения профессора В.Ф. Барковского.</p>
+      </div>
+      <div class="info-item">
+        <span class="material-icons">place</span>
+        <p>Конференция проводится в г. Екатеринбурге в <a href="https://insma.urfu.ru" target="_blank">Институте естественных наук и математики</a> (см. <a href="https://goo.gl/maps/xfh4kpsY2ZwQcyvZA" target="_blank">Куйбышева, 48</a> на карте) Уральского федерального университета. Организаторы конференции: <a href="https://urfu.ru" target="_blank">Уральский федеральный университет</a> и Уральское отделение РАН.</p>
+      </div>
+      <div class="info-item">
+        <span class="material-icons">event</span>
+        <p>Конференция состоится <a href="#dates">24-27 апреля 2023 года</a>.</p>
+      </div>
+      <div class="info-item">
+        <span class="material-icons">language</span>
+        <p>Рабочими языками конференции являются русский и английский.</p>
+      </div>
+      <h3>Тематика конференции (научные секции)</h3>
+      <div class="list-container centered">
+        <ul>
+          <li>Технология и электрохимия неорганических материалов</li>
+          <li>Термодинамика и структура неорганических систем</li>
+          <li>Аналитическая химия и химия окружающей среды</li>
+          <li>Органическая химия</li>
+          <li>Физико-химия полимерных и коллоидных систем</li>
+      </ul>
+    </div>
+    </section>
+
+
+    <section id="dates">
+      <h2>Основные даты</h2>
+      <div class="list-container centered">
+        <ul>
+          <li><strong>12 января 2023 года</strong> – начало онлайн-регистрации и приема тезисов докладов</li>
+          <li><strong>15 марта</strong> – окончание приема тезисов докладов</li>
+          <li><strong>10 апреля</strong> – окончание приема оргвзноса</li>
+          <li><strong>24 апреля</strong> – регистрация участников, открытие конференции и пленарные доклады</li>
+          <li><strong>25 апреля</strong> – секционные заседания (устные доклады)</li>
+          <li><strong>26 апреля</strong> – секционные заседания (стендовые доклады)</li>
+          <li><strong>27 апреля</strong> – закрытие конференции</li>
+        </ul>
+      </div>
+      <div class="calendar-wrapper">
+        <div class="calendar january">
+          <div class="calendar__picture">
+            <h3>Январь 2023</h3>
+          </div>
+          <div class="calendar__date">
+            <div class="calendar__day">Пн</div>
+            <div class="calendar__day">Вт</div>
+            <div class="calendar__day">Ср</div>
+            <div class="calendar__day">Чт</div>
+            <div class="calendar__day">Пт</div>
+            <div class="calendar__day">Сб</div>
+            <div class="calendar__day">Вс</div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div class="calendar__number">1</div>
+            <div class="calendar__number">2</div>
+            <div class="calendar__number">3</div>
+            <div class="calendar__number">4</div>
+            <div class="calendar__number">5</div>
+            <div class="calendar__number">6</div>
+            <div class="calendar__number">7</div>
+            <div class="calendar__number">8</div>
+            <div class="calendar__number">9</div>
+            <div class="calendar__number">10</div>
+            <div class="calendar__number">11</div>
+            <div class="calendar__number calendar__number--important">12</div>
+            <div class="calendar__number">13</div>
+            <div class="calendar__number">14</div>
+            <div class="calendar__number">15</div>
+            <div class="calendar__number">16</div>
+            <div class="calendar__number">17</div>
+            <div class="calendar__number">18</div>
+            <div class="calendar__number">19</div>
+            <div class="calendar__number">20</div>
+            <div class="calendar__number">21</div>
+            <div class="calendar__number">22</div>
+            <div class="calendar__number">23</div>
+            <div class="calendar__number">24</div>
+            <div class="calendar__number">25</div>
+            <div class="calendar__number">26</div>
+            <div class="calendar__number">27</div>
+            <div class="calendar__number">28</div>
+            <div class="calendar__number">29</div>
+            <div class="calendar__number">30</div>
+            <div class="calendar__number">31</div>
+          </div>
+        </div>
+        <div class="calendar february">
+          <div class="calendar__picture">
+            <h3>Февраль 2023</h3>
+          </div>
+          <div class="calendar__date">
+            <div class="calendar__day">Пн</div>
+            <div class="calendar__day">Вт</div>
+            <div class="calendar__day">Ср</div>
+            <div class="calendar__day">Чт</div>
+            <div class="calendar__day">Пт</div>
+            <div class="calendar__day">Сб</div>
+            <div class="calendar__day">Вс</div>
+            <div></div>
+            <div></div>
+            <div class="calendar__number">1</div>
+            <div class="calendar__number">2</div>
+            <div class="calendar__number">3</div>
+            <div class="calendar__number">4</div>
+            <div class="calendar__number">5</div>
+            <div class="calendar__number">6</div>
+            <div class="calendar__number">7</div>
+            <div class="calendar__number">8</div>
+            <div class="calendar__number">9</div>
+            <div class="calendar__number">10</div>
+            <div class="calendar__number">11</div>
+            <div class="calendar__number">12</div>
+            <div class="calendar__number">13</div>
+            <div class="calendar__number">14</div>
+            <div class="calendar__number">15</div>
+            <div class="calendar__number">16</div>
+            <div class="calendar__number">17</div>
+            <div class="calendar__number">18</div>
+            <div class="calendar__number">19</div>
+            <div class="calendar__number">20</div>
+            <div class="calendar__number">21</div>
+            <div class="calendar__number">22</div>
+            <div class="calendar__number">23</div>
+            <div class="calendar__number">24</div>
+            <div class="calendar__number">25</div>
+            <div class="calendar__number">26</div>
+            <div class="calendar__number">27</div>
+            <div class="calendar__number">28</div>
+          </div>
+        </div>
+        <div class="calendar march">
+          <div class="calendar__picture">
+            <h3>Март 2023</h3>
+          </div>
+          <div class="calendar__date">
+            <div class="calendar__day">Пн</div>
+            <div class="calendar__day">Вт</div>
+            <div class="calendar__day">Ср</div>
+            <div class="calendar__day">Чт</div>
+            <div class="calendar__day">Пт</div>
+            <div class="calendar__day">Сб</div>
+            <div class="calendar__day">Вс</div>
+            <div></div>
+            <div></div>
+            <div class="calendar__number">1</div>
+            <div class="calendar__number">2</div>
+            <div class="calendar__number">3</div>
+            <div class="calendar__number">4</div>
+            <div class="calendar__number">5</div>
+            <div class="calendar__number">6</div>
+            <div class="calendar__number">7</div>
+            <div class="calendar__number">8</div>
+            <div class="calendar__number">9</div>
+            <div class="calendar__number">10</div>
+            <div class="calendar__number">11</div>
+            <div class="calendar__number">12</div>
+            <div class="calendar__number">13</div>
+            <div class="calendar__number">14</div>
+            <div class="calendar__number calendar__number--important">15</div>
+            <div class="calendar__number">16</div>
+            <div class="calendar__number">17</div>
+            <div class="calendar__number">18</div>
+            <div class="calendar__number">19</div>
+            <div class="calendar__number">20</div>
+            <div class="calendar__number">21</div>
+            <div class="calendar__number">22</div>
+            <div class="calendar__number">23</div>
+            <div class="calendar__number">24</div>
+            <div class="calendar__number">25</div>
+            <div class="calendar__number">26</div>
+            <div class="calendar__number">27</div>
+            <div class="calendar__number">28</div>
+            <div class="calendar__number">29</div>
+            <div class="calendar__number">30</div>
+            <div class="calendar__number">31</div>
+          </div>
+        </div>
+        <div class="calendar april">
+          <div class="calendar__picture">
+            <h3>Апрель 2023</h3>
+          </div>
+          <div class="calendar__date">
+            <div class="calendar__day">Пн</div>
+            <div class="calendar__day">Вт</div>
+            <div class="calendar__day">Ср</div>
+            <div class="calendar__day">Чт</div>
+            <div class="calendar__day">Пт</div>
+            <div class="calendar__day">Сб</div>
+            <div class="calendar__day">Вс</div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div class="calendar__number">1</div>
+            <div class="calendar__number">2</div>
+            <div class="calendar__number">3</div>
+            <div class="calendar__number">4</div>
+            <div class="calendar__number">5</div>
+            <div class="calendar__number">6</div>
+            <div class="calendar__number">7</div>
+            <div class="calendar__number">8</div>
+            <div class="calendar__number">9</div>
+            <div class="calendar__number calendar__number--important">10</div>
+            <div class="calendar__number">11</div>
+            <div class="calendar__number">12</div>
+            <div class="calendar__number">13</div>
+            <div class="calendar__number">14</div>
+            <div class="calendar__number">15</div>
+            <div class="calendar__number">16</div>
+            <div class="calendar__number">17</div>
+            <div class="calendar__number">18</div>
+            <div class="calendar__number">19</div>
+            <div class="calendar__number">20</div>
+            <div class="calendar__number">21</div>
+            <div class="calendar__number">22</div>
+            <div class="calendar__number">23</div>
+            <div class="calendar__number calendar__number--important">24</div>
+            <div class="calendar__number calendar__number--important">25</div>
+            <div class="calendar__number calendar__number--important">26</div>
+            <div class="calendar__number calendar__number--important">27</div>
+            <div class="calendar__number">28</div>
+            <div class="calendar__number">29</div>
+            <div class="calendar__number">30</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="register">
+      <h2>Регистрация и оплата оргвзноса</h2>
+      <p>Для участия в работе конференции необходимо:</p>
+      <div class="info-item">
+        <span class="material-icons">login</span>
+        <a href="https://docs.google.com/forms/d/1YxtUQbqUB_dtqzN9a9_cRwkU_gwLvp6bjiI0QYwBRCU" target="_blank" class="button register-button">Зарегистрироваться</a>
+      </div>
+      <div class="info-item">
+        <span class="material-icons">email</span>
+        <p>Отправить тезисы доклада на e-mail конференции: <a href="mailto:ConferenceUSU@yandex.ru">ConferenceUSU@yandex.ru</a>. Тезисы следует оформлять в соответствии с <a href="#abstracts">установленной формой</a>, которая загружается с сайта конференции. Оргкомитет проводит экспертизу тезисов докладов и оставляет за собой право отбора докладов в программу конференции.</p>
+      </div>
+      <div class="info-item">
+        <span class="material-icons">payment</span>
+        <p>После включения докладов в программу конференции необходимо оплатить организационный взнос в зависимости от типа участия. Тезисы докладов участников, не оплативших оргвзнос, публиковаться не будут. Сотрудники, аспиранты и студенты Уральского федерального университета освобождены от уплаты оргвзноса. Информация с реквизитами для оплаты оргвзноса будет предоставлена позднее.</p>
+      </div>
+      <div class="fees-container">
+        <div class="fees-card">
+          <h3>Доклад</h3>
+          <div class="fee">1000 ₽</div>
+          <span class="material-icons">shopping_cart</span>
+          <p>Очные (устные или стендовые) доклады</p>
+          <input type="button" value="Оплатить" disabled="true">
+        </div>
+        <div class="fees-card">
+          <h3>Заочно</h3>
+          <div class="fee">700 ₽</div>
+          <span class="material-icons">savings</span>
+          <p>Заочное участие</p>
+          <input type="button" value="Оплатить" disabled="true">
+        </div>
+        <div class="fees-card">
+          <h3>УрФУ</h3>
+          <div class="fee">0 ₽</div>
+          <span class="material-icons">credit_card_off</span>
+          <p>Сотрудники, аспиранты и студенты УрФУ</p>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="abstracts">
+      <h2>Оформление тезисов</h2>
+      <p>Тезисы необходимо оформлять в соответствии с шаблоном:</p>
+      <a href="./docs/abstract-conferenceusu.docx" class="button">Скачать шаблон тезисов (*.docx)</a>
+      <p>По материалам конференции будет издан сборник тезисов докладов. По окончании конференции полная версия сборника тезисов будет размещена на сайте конференции. Напоминаем, что тезисы докладов участников, не оплативших оргвзнос, публиковаться не будут (за исключением сотрудников, аспирантов и студентов УрФУ). Лучшие доклады будут рекомендованы для издания в виде статей в специальном выпуске журнала <a href="http://chimicatechnoacta.ru" target="_blank">Chimica Techno Acta</a>, входящем в международную базу данных Scopus.</p>
+    </section>
+
+
+    <section id="committee">
+      <h2>Оргкомитет и контакты</h2>
+      <p class="centered"><a href="mailto:ConferenceUSU@yandex.ru">ConferenceUSU@yandex.ru</a></p>
+      <p>Адрес: 620000, г. Екатеринбург, пр. Ленина, 51, Уральский федеральный университет, Институт естественных наук и математики, кафедра физической и неорганической химии, <br />тел.: <a href="tel:+73432517927">(343) 251-79-27</a></p>
+      <p>Помимо сайта, общее информирование участников конференции также производится при помощи рассылки (@urfu.email). Подписаться на рассылку в настоящее время можно только по запросу. Отписаться можно, отправив пустое письмо с темой "unsubscribe conferenceusu" (без кавычек) на <a href="mailto:sympa@urfu.email?subject=unsubscribe%20conferenceusu">sympa@urfu.email</a>.</p>
+      <h3>Оргкомитет</h3>
+      <div class="committee-wrapper">
+        <div class="committee-card">
+          <h4>Председатель</h4>
+          <img width="256" alt="Albert Einstein Head cleaned" src="./img/chairman.jpg">
+          <p><strong>Черепанов Владимир Александрович</strong></p>
+          <p>д.х.н., профессор,заведующий кафедрой физической и неорганической химии ИЕНиМ УрФУ</p>
+        </div>
+        <div class="committee-card">
+          <h4>Зам. председателя</h4>
+          <img width="256" alt="Albert Einstein Head cleaned" src="./img/vicechairman.jpg">
+          <p><strong>Зуев Андрей Юрьевич</strong></p>
+          <p>д.х.н., профессор, профессор кафедры физической и неорганической химии ИЕНиМ УрФУ</p>
+        </div>
+        <div class="committee-card">
+          <h4>Секретарь</h4>
+          <img width="256" src="./img/secretary.jpg">
+          <p><strong>Волкова Надежда Евгеньевна</strong></p>
+          <p>к.х.н., доцент кафедры физической и неорганической химии ИЕНиМ УрФУ</p>
+        </div>
+      </div>
+      <h3>Члены оргкомитета</h3>
+      <div class="list-container">
+        <ul>
+          <li><strong>Базуева М.В.</strong>, аспирант кафедры физической и неорганической химии ИЕНиМ УрФУ</li>
+          <li><strong>Веринкина Е.М.</strong>, студент 2 курса бакалавриата, департамент фундаментальной и прикладной химии ИЕНиМ УрФУ</li>
+          <li><strong>Викторова В.В.</strong>, аспирант кафедры органической химии и высокомолекулярных соединений УрФУ</li>
+          <li><strong>Гаврилова Л.Я.</strong>, директор департамента фундаментальной и прикладной химии УрФУ</li>
+          <li><strong>Головачев И.Б.</strong>, аспирант кафедры физической и неорганической химии ИЕНиМ УрФУ</li>
+          <li><strong>Голуб А.Я.</strong>, ассистент кафедры аналитической химии и химии окружающей среды ИЕНиМ УрФУ</li>
+          <li><strong>Жарков Г.П.</strong>, аспирант кафедры аналитической химии и химии окружающей среды ИЕНиМ УрФУ</li>
+          <li><strong>Зимницкий Н.С.</strong>, к.х.н., ассистент кафедры органической химии и высокомолекулярных соединений ИЕНиМ УрФУ</li>
+          <li><strong>Кузнецова Е.Д.</strong>, аспирант кафедры органической химии и высокомолекулярных соединений ИЕНиМ УрФУ</li>
+          <li><strong>Мазурин М.О.</strong>, аспирант кафедры физической и неорганической химии ИЕНиМ УрФУ</li>
+          <li><strong>Морозова М.В.</strong>, доцент кафедры аналитической химии и химии окружающей среды ИЕНиМ УрФУ</li>
+          <li><strong>Середа В.В.</strong>, к.х.н., с.н.с. лаборатории водородной энергетики УрФУ</li>
+          <li><strong>Смелов А.О.</strong>, студент 4 курса бакалавриата, департамент фундаментальной и прикладной химии ИЕНиМ УрФУ</li>
+          <li><strong>Соломахина Е.Е.</strong>, аспирант кафедры физической и неорганической химии ИЕНиМ УрФУ</li>
+          <li><strong>Усачев С.А.</strong>, к.х.н. доцент департамента фундаментальной и прикладной химии ИЕНиМ УрФУ</li>
+          <li><strong>Чекушина Я.В.</strong>, студента 2 курса магистратуры кафедры физической и неорганической химии ИЕНиМ УрФУ</li>
+          <li><strong>Филимонова О.В.</strong>, студент 4 курса бакалавриата, департамент фундаментальной и прикладной химии ИЕНиМ УрФУ</li>
+        </ul>
+      </div>
+      <h3>Программный комитет</h3>
+      <h4>Председатель:</h4>
+      <div class="list-container">
+        <ul>
+          <li><strong>Анимица И.Е.</strong>, д.х.н., профессор кафедры физической и неорганической химии ИЕНиМ УрФУ</li>
+        </ul>
+      </div>
+      <h4>Заместитель председателя:</h4>
+      <div class="list-container">
+        <ul>
+          <li><strong>Сафронов А.П.</strong>, д.ф.-м.н., профессор департамента фундаментальной и прикладной химии ИЕНиМ УрФУ</li>
+        </ul>
+      </div>
+      <h4>Члены программного комитета:</h4>
+      <div class="list-container">
+        <ul>
+          <li><strong>Вшивков С.А.</strong>, д.х.н., профессор кафедры органической химии и высокомолекулярных соединений ИЕНиМ УрФУ</li>
+          <li><strong>Зайков Ю.П.</strong>, д.х.н., научный руководитель Института высокотемпературной электрохимии УрО РАН</li>
+          <li><strong>Зуев А.Ю.</strong>, д.х.н., профессор кафедры физической и неорганической химии ИЕНиМ УрФУ</li>
+          <li><strong>Кожевников В.Л.</strong>, д.х.н., академик РАН, Институт химии твердого тела УрО РАН</li>
+          <li><strong>Кузнецов М.В.</strong>, д.х.н., директор Института химии твердого тела УрО РАН</li>
+          <li><strong>Неудачина Л.К.</strong>, к.х.н., зав. кафедрой аналитической химии и химии окружающей среды ИЕНиМ УрФУ</li>
+          <li><strong>Русинова Е.В.</strong>, д.х.н., профессор кафедры органической химии и высокомолекулярных соединений ИЕНиМ УрФУ</li>
+          <li><strong>Салоутин В.И.</strong>, д.х.н., зам. директора Института органического синтеза УрО РАН</li>
+          <li><strong>Сосновских В.Я.</strong>, д.х.н., зав. кафедрой органической химии и высокомолекулярных соединений ИЕНиМ УрФУ</li>
+        </ul>
+      </div>
+    </section>
+
+
+    <section id="archive">
+      <h2>Архив</h2>
+      <h4>2022 (XXXII Российская молодежная конференция)</h4>
+      <p><a target="_blank" href="https://insma.urfu.ru/images/conferences/chem_ruten/2022/Abstracts-2022.pdf">Сборник</a> (pdf, 11.5 Mb)</p>
+      <p><a target="_blank" href="https://insma.urfu.ru/images/conferences/chem_ruten/2022/Prog-2022.pdf">Программа</a> (pdf, 0.6 Mb)</p>
+      <h4>2021 (XXXI Российская молодежная конференция)</h4>
+      <p><a target="_blank" href="https://insma.urfu.ru/images/conferences/chem_ruten/2021/Abstracts-2021.pdf">Сборник</a> (pdf, 7.6 Mb)</p>
+      <p><a target="_blank" href="https://insma.urfu.ru/images/conferences/chem_ruten/2021/Prog-2021.pdf">Программа</a> (pdf, 0.6 Mb)</p>
+      <h4>2020 (XXX Российская молодежная конференция)</h4>
+      <p><a target="_blank" href="https://insma.urfu.ru/images/conferences/chem_ruten/2020/Abstracts-2020.pdf">Сборник</a> (pdf, 10.3 Mb)</p>
+      <h4>2019 (XXIX Российская молодежная конференция)</h4>
+      <p><a target="_blank" href="https://insma.urfu.ru/images/conferences/chem_ruten/2019/Abstracts-2019.pdf">Сборник</a> (pdf, 7.8 Mb)</p>
+      <p><a target="_blank" href="https://insma.urfu.ru/images/conferences/chem_ruten/2019/Prog-2019.pdf">Программа</a> (pdf, 0.7 Mb)</p>
+      <h4>2018 (XXVIII Российская молодежная конференция)</h4>
+      <p><a target="_blank" href="https://insma.urfu.ru/images/conferences/chem_ruten/2018/Abstracts-2018.pdf">Сборник</a> (pdf, 9.7 Mb)</p>
+      <p><a target="_blank" href="https://insma.urfu.ru/images/conferences/chem_ruten/2018/Prog-2018.pdf">Программа</a> (pdf, 0.7 Mb)</p>
+      <h4>2017 (XXVII Российская молодежная конференция)</h4>
+      <p><a target="_blank" href="https://insma.urfu.ru/images/conferences/chem_ruten/2017/Abstracts-2017.pdf">Сборник</a> (pdf, 9.2 Mb)</p>
+      <p><a target="_blank" href="https://insma.urfu.ru/images/conferences/chem_ruten/2017/Prog-2017.pdf">Программа</a> (pdf, 0.7 Mb)</p>
+      <h4>2016 (XXVI Российская молодежная конференция)</h4>
+      <p><a target="_blank" href="https://insma.urfu.ru/images/conferences/chem_ruten/2016/Abstracts-2016.pdf">Сборник</a> (pdf, 9.2 Mb)</p>
+      <p><a target="_blank" href="https://insma.urfu.ru/images/conferences/chem_ruten/2016/Prog-2016.pdf">Программа</a> (pdf, 0.5 Mb)</p>
+      <h4>2015 (XXV Российская молодежная конференция)</h4>
+      <p><a target="_blank" href="https://insma.urfu.ru/images/conferences/chem_ruten/2015/Abstracts-2015.pdf">Сборник</a> (pdf, 6.7 Mb)</p>
+      <p><a target="_blank" href="https://insma.urfu.ru/images/conferences/chem_ruten/2015/Prog-2015.pdf">Программа</a> (pdf, 0.7 Mb)</p>
+      <h4>2014 (XXIV Российская молодежная конференция)</h4>
+      <p><a target="_blank" href="https://insma.urfu.ru/images/conferences/chem_ruten/2014/Abstracts-2014.pdf">Сборник</a> (pdf, 6.3 Mb)</p>
+      <h4>2013 (XXIII Российская молодежная конференция)</h4>
+      <p><a target="_blank" href="https://insma.urfu.ru/images/conferences/chem_ruten/2013/Abstracts-2013.pdf">Сборник</a> (pdf, 7.3 Mb)</p>
+      <h4>2012 (XXII Российская молодежная конференция)</h4>
+      <p><a target="_blank" href="https://insma.urfu.ru/images/conferences/chem_ruten/2012/Abstracts-2012.pdf">Сборник</a> (pdf, 5.1 Mb)</p>
+      <h4>2011 (XXI Российская молодежная конференция)</h4>
+      <p><a target="_blank" href="https://insma.urfu.ru/images/conferences/chem_ruten/2011/Abstracts-2011.pdf">Сборник</a> (pdf, 6.2 Mb)</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shariff" data-button-style="icon" data-lang="ru" data-url="https://conferenceusu.github.io" data-services="[&quot;telegram&quot;,&quot;whatsapp&quot;,&quot;vk&quot;]"></div>
+    <ul>
+      <li><a href="#">Наверх</a></li>
+      <li><a href="#committee">Обратная связь</a></li>
+    </ul>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,412 @@
+* {
+  box-sizing: border-box;
+}
+:root {
+  font-family: "PT Sans", sans-serif;
+  --color-main: #067B0F;
+  --color-second: #E03214;
+  --color-third: #9C3E2D;
+}
+.material-icons {
+  font-size: 48px;
+  color: var(--color-third);
+}
+body, html {
+  margin: 0;
+  min-height: 100%;
+  min-width: 360px;
+}
+header, nav, main, footer {
+  width: 100%;
+}
+header {
+  background: white;
+  padding: 1rem;
+}
+.logo-wrap {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.header-img {
+  height: auto;
+  max-width: 300px;
+}
+.insma-logo {
+  max-width: 400px;
+  flex: 2 0 300px;
+}
+.conf-logo {
+  max-width: 256px;
+  flex: 1 0 200px;
+}
+h1 {
+  font-size: max(1.8rem, 2vw);
+  margin: 1rem auto 0;
+  text-align: center;
+  line-height: 1;
+  max-width: 42ch;
+}
+nav {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  padding: 0.3rem;
+  background: linear-gradient(white, whitesmoke);
+  box-shadow: 0 2px 2px 0 lightgray;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  margin: 0 auto;
+  padding: 0;
+}
+nav li {
+  margin: 0.5rem 0;
+}
+nav ul:before,
+nav ul:after {
+  content: "";
+  margin-top: 3px;
+  border-bottom: 2px dotted var(--color-second);
+  flex: 1 1 0;
+}
+nav a {
+  font-size: 1.3rem;
+  padding: 0.4rem;
+  border-radius: 8px;
+  border: none;
+}
+nav a:hover {
+  border: none;
+  background-color: var(--color-main);
+  color: ghostwhite;
+}
+#info {
+  background-color: white;
+}
+#dates {
+  background-color: linen;
+}
+#register {
+  background-color: white;
+}
+#abstracts {
+  background-color: linen;
+}
+#committee {
+  background-color: white;
+}
+#archive {
+  background-color: linen;
+}
+.info-item {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+.info-item > :nth-child(2) {
+  margin-left: 1rem;
+}
+.committee-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  max-width: none;
+}
+.committee-card {
+  width: 256px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 2px solid darkgrey;
+  border-radius: 5px;
+}
+.committee-card h4 {
+  background: lightgray;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 1rem 0;
+  border-bottom: 1px solid darkgrey;
+}
+.committee-card img {
+  width: 100%;
+  max-height: 275px;
+  object-fit: cover;
+  object-position: bottom;
+}
+.committee-card p {
+  margin: 0.2rem;
+}
+h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 0;
+}
+h3 {
+  font-size: 1.3rem;
+  text-align: center;
+}
+h4 {
+  font-size: 1.2rem;
+  text-align: center;
+}
+section {
+  padding: 2rem 1rem;
+  scroll-margin-top: 2rem;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  overflow: hidden;
+}
+section > * {
+  max-width: 81ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.centered {
+  text-align: center;
+}
+.list-container ul {
+  display: inline-block;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  list-style-position: inside;
+}
+p, a.button {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+a.button {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: whitesmoke;
+  border-radius: 1rem;
+  border: 1px solid var(--color-main);
+}
+a.button:hover {
+  background-color: var(--color-main);
+  color: whitesmoke;
+  border: 1px solid var(--color-main);
+}
+.fees-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+.fees-card {
+  flex-basis: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid var(--color-main);
+  border-radius: 5px;
+  text-align: center;
+}
+.fees-card > * {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.fee {
+  font-size: 1.5rem;
+}
+.fees-card input[type="button"] {
+  font-size: 1.1rem;
+  font-weight: bold;
+  width: 100%;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: var(--color-second);
+  background-color: whitesmoke;
+  text-transform: uppercase;
+  margin-top: auto;
+}
+.fees-card input[type="button"]:hover {
+  background-color: var(--color-main);
+  color: whitesmoke;
+}
+.fees-card input[disabled="true"]:hover {
+  color: var(--color-second);
+  background-color: whitesmoke;
+  cursor: not-allowed;
+}
+#archive h4,
+#archive p {
+  text-align: center;
+}
+footer {
+  background: #423d3d;
+  padding: 0.5rem;
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: right;
+  gap: 1.5rem;
+}
+.shariff {
+  flex: 1 1 auto;
+}
+.shariff ul {
+  align-items: center;
+  justify-content: flex-end;
+}
+.shariff .orientation-horizontal li {
+  margin-bottom: 0;
+  text-align: center;
+}
+footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+footer li {
+  display: inline;
+  margin-left: 0.5em;
+}
+footer a:hover {
+  border: none;
+}
+footer a,
+footer a:visited {
+  color: white;
+}
+a, a:visited {
+  text-decoration: none;
+  color: var(--color-second);
+}
+a:hover {
+  border: none;
+  color: var(--color-main);
+  border-bottom: 1px solid var(--color-main);
+}
+a[href^="tel:"]:before {
+  content: "\260e";
+  margin-right: 0.5em;
+}
+a[href^="mailto:"]:before {
+  content: "\2709";
+  margin-right: 0.5em;
+}
+main a[href^="http"]::after,
+main a[href^="https://"]::after
+{
+  content: "";
+  width: 11px;
+  height: 11px;
+  margin-left: 4px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z'/%3E%3Cpath fill-rule='evenodd' d='M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z'/%3E%3C/svg%3E");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: inline-block;
+}
+
+.calendar-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 1rem;
+  max-width: none;
+}
+.january .calendar__picture {
+  background: #262626 url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Winter_Landscape%2C_Holland_MET_DP143197.jpg/292px-Winter_Landscape%2C_Holland_MET_DP143197.jpg") no-repeat center / cover;
+}
+.february .calendar__picture {
+  background: #262626 url("https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Stadswal_in_de_winter_Rijksmuseum_SK-A-2112.jpeg/320px-Stadswal_in_de_winter_Rijksmuseum_SK-A-2112.jpeg") no-repeat center / cover;
+}
+.march .calendar__picture {
+  background: #262626 url("https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Spring_Woods_MET_ap06.1293.jpg/310px-Spring_Woods_MET_ap06.1293.jpg") no-repeat center / cover;
+}
+.april .calendar__picture {
+  background: #262626 url("https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Charles_Fran%C3%A7ois_Daubigny_-_The_Coming_Storm%3B_Early_Spring_-_Walters_37163.jpg/320px-Charles_Fran%C3%A7ois_Daubigny_-_The_Coming_Storm%3B_Early_Spring_-_Walters_37163.jpg") no-repeat center / cover;
+}
+.calendar {
+  width: 230px;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 5px 2px darkgrey;
+}
+.calendar__picture {
+  height: 200px;
+  padding: 20px;
+  color: #fff;
+  text-shadow: 0px 0px 3px black;
+}
+.calendar__picture h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.calendar__date {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
+}
+.calendar__day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+  font-weight: bold;
+}
+.calendar__number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+}
+.calendar__day:nth-child(7),
+.calendar__number:nth-child(7n) {
+  color: darkred;
+}
+.calendar__number--current,
+.calendar__number:hover,
+.calendar__number--important {
+    background-color: var(--color-main);
+    color: #fff !important;
+    font-weight: bold;
+    cursor: pointer;
+}
+.calendar__number--current {
+  background-color: var(--color-main);
+}
+.calendar__number:hover {
+  background-color: var(--color-second);
+}
+.calendar__number--important {
+    background-color: var(--color-third);
+}
+
+@media all and (max-width: 900px) {
+  nav ul:before,
+  nav ul:after {
+    content: none;
+  }
+}
+@media all and (max-width: 420px) {
+.material-icons {
+  font-size: 36px;
+ }
+}
