@@ -183,11 +183,11 @@ section > * {
   padding: 0;
   list-style-position: inside;
 }
-p, a.button {
+p, a.large-button {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
-a.button {
+a.large-button {
   display: block;
   width: 100%;
   padding: 0.5rem;
@@ -198,7 +198,7 @@ a.button {
   border-radius: 1rem;
   border: 1px solid var(--color-main);
 }
-a.button:hover {
+a.large-button:hover {
   background-color: var(--color-main);
   color: whitesmoke;
   border: 1px solid var(--color-main);
@@ -226,7 +226,7 @@ a.button:hover {
 .fee {
   font-size: 1.5rem;
 }
-.fees-card input[type="button"] {
+.fees-card .pay-button {
   font-size: 1.1rem;
   font-weight: bold;
   width: 100%;
@@ -238,15 +238,16 @@ a.button:hover {
   text-transform: uppercase;
   margin-top: auto;
 }
-.fees-card input[type="button"]:hover {
+.fees-card .pay-button:hover {
   background-color: var(--color-main);
   color: whitesmoke;
 }
-.fees-card input[disabled="true"],
-.fees-card input[disabled="true"]:hover {
+.fees-card .pay-button[disabled="true"],
+.fees-card .pay-button[disabled="true"]:hover {
   color: lightslategray;
   background-color: whitesmoke;
   cursor: not-allowed;
+  /*pointer-events: none;*/
 }
 #archive h4,
 #archive p {
