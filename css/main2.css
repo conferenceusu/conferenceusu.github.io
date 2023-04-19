@@ -169,7 +169,7 @@ section {
   line-height: 1.4;
 }
 section > * {
-  max-width: 81ch;
+  max-width: 780px;
   margin-left: auto;
   margin-right: auto;
 }
