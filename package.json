@@ -1,0 +1,11 @@
+{
+  "name": "conferenceusu-webpage",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "browser-sync start --server --files ./ --ignore .git/*"
+  },
+  "dependencies": {
+    "browser-sync": ">1.0.0"
+  }
+}
