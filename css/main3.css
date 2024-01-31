@@ -83,11 +83,15 @@ nav a {
   padding: 0.4rem;
   border-radius: 8px;
   border: none;
+  text-align: center;
 }
 nav a:hover {
   border: none;
   background-color: var(--color-main);
   color: ghostwhite;
+}
+.nav-menu-link {
+  display: none;
 }
 #info {
   background-color: white;
@@ -411,14 +415,22 @@ main a[href^="https://"]::after
 }
 @media all and (max-width: 470px) {
   section {
-    scroll-margin-top: 8rem;
+    scroll-margin-top: 2rem;
+  }
+  nav ul {
+    display: none;
+  }
+  nav ul.dropdown {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .nav-menu-link {
+    display: block;
   }
 }
 @media all and (max-width: 440px) {
-.material-icons {
-  font-size: 36px;
- }
-  section {
-    scroll-margin-top: 12rem;
+  .material-icons {
+    font-size: 36px;
   }
 }

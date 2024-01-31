@@ -58,6 +58,25 @@
         }
       }
     }, {once: true});
+    const dropDown = (function() {
+      let menuDropped = false;
+      return (show = true) => {
+        if (!show) {
+          menuDropped = false;
+        } else {
+          menuDropped = !menuDropped;
+        }
+        let menuList = document.querySelector("nav ul");
+        let menuButton = document.querySelector("nav .nav-menu-link");
+        if (menuDropped) {
+          menuList.classList.add("dropdown");
+          menuButton.textContent = "Меню ▲";
+        } else {
+          menuList.classList.remove("dropdown");
+          menuButton.textContent = "Меню ▼";
+        }
+      };
+    })();
     </script>
 </head>
 
@@ -71,13 +90,14 @@
   </header>
 
   <nav id="nav-bar">
+    <a class="nav-menu-link" href="javascript:void(0);" onclick="dropDown()">Меню ▼</a>
     <ul>
-      <li><a class="nav-link" href="#info">Информация</a></li>
-      <li><a class="nav-link" href="#dates">Даты</a></li>
-      <li><a class="nav-link" href="#register">Регистрация и оргвзнос</a></li>
-      <li><a class="nav-link" href="#abstracts">Оформление тезисов</a></li>
-      <li><a class="nav-link" href="#committee">Оргкомитет</a></li>
-      <li><a class="nav-link" href="#archive">Архив</a></li>
+      <li><a class="nav-link" onclick="dropDown(false)" href="#info">Информация</a></li>
+      <li><a class="nav-link" onclick="dropDown(false)" href="#dates">Даты</a></li>
+      <li><a class="nav-link" onclick="dropDown(false)" href="#register">Регистрация и оргвзнос</a></li>
+      <li><a class="nav-link" onclick="dropDown(false)" href="#abstracts">Оформление тезисов</a></li>
+      <li><a class="nav-link" onclick="dropDown(false)" href="#committee">Оргкомитет</a></li>
+      <li><a class="nav-link" onclick="dropDown(false)" href="#archive">Архив</a></li>
     </ul>
   </nav>
 
