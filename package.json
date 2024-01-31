@@ -3,7 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+<<<<<<< HEAD
     "start": "browser-sync start --server --files ./ --ignore .git/*"
+=======
+    "start": "browser-sync start --server --files ./"
+>>>>>>> d5f43ed43d7b2c1ef7d40774dafd018ea64c4435
   },
   "dependencies": {
     "browser-sync": ">1.0.0"
