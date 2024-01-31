@@ -176,7 +176,7 @@ section > * {
 .centered {
   text-align: center;
 }
-.list-container ul {
+.list-container > ul {
   display: inline-block;
   text-align: left;
   margin: 0;
