@@ -128,8 +128,8 @@ export default function ConfProgram({ presentations }) {
                 setCheckedPresentations(JSON.parse(storedCheckedOnes));
             }
         }
-        console.log("mounted");
-        console.log(filter);
+        //console.log("mounted");
+        //console.log(filter);
     }, []);
     function handleFilter(newFilter) {
         if (storageAvailable("localStorage")) {
@@ -193,7 +193,12 @@ export default function ConfProgram({ presentations }) {
                        placeholder="фильтр докладов"
                        value={filter.text}
                        onInput={e => handleFilterText(e.target.value)}
-                       onKeyUp={e => {if (e.code === 'Enter') {e.target.blur()}}} />
+                       onKeyUp={e => {
+                         if (e.code === 'Enter' || e.keyCode === 13) {
+                           e.target.blur();
+                         }
+                       }}
+                       onFocusIn={e => e.target.select()} />
                 <select class="filter-select"
                         name="section"
                         value={filter.section}

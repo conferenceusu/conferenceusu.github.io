@@ -178,19 +178,22 @@ const presentationObjects = presentations.map(p => parsePresentation(p));
   #timetable h1 + p {
     text-align: center;
   }
+  #timetable em {
+    color: var(--color-second);
+    margin-right: 0.7rem;
+  }
+  #timetable strong em,
+  #timetable em strong {
+    color: black;
+    margin-right: 0;
+  }
 </style>
 <style>
   section {
     max-width: 780px;
-    padding-top: 0;
-    scroll-margin-top: 5rem;
     margin-left: auto;
     margin-right: auto;
-  }
-  #timetable,
-  #presentations {
-    padding-left: 0;
-    padding-right: 0;
-    padding-bottom: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 </style>

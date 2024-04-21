@@ -5,10 +5,6 @@
   --color-section-3: #dd9fb6;
 }
 
-main {
-  padding: 0 10px;
-}
-
 .section-name {
   margin: 1.5rem auto;
 }
@@ -102,6 +98,11 @@ option {
 .presentation__number,
 .presentation__title {
   align-self: center;
+}
+
+.presentation__title {
+  overflow-wrap: anywhere;
+  word-wrap: anywhere;
 }
 
 .presentation__authors {
