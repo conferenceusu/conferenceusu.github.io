@@ -1,0 +1,236 @@
+---
+import "normalize.css/normalize.css";
+
+const { title } = Astro.props;
+
+const thisPageURL = Astro.url.href;
+const feedbackURL = Astro.url.origin + '/#committee';
+---
+
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>{title}</title>
+  <meta name="description" content="Российская молодёжная научная конференция с международным участием 
+  «Проблемы теоретической и экспериментальной химии» проводится ежегодно на базе Института естественных наук и математики УрФУ">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+  <link rel="manifest" href="./site.webmanifest">
+
+  <meta property="og:title" content="Проблемы теоретической и экспериментальной химии" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={thisPageURL} />
+  <meta property="og:image" content="./android-chrome-512x512.png" />
+  <meta property="og:image:width" content="512" />
+  <meta property="og:image:height" content="512" />
+  <meta property="og:image" content="./android-chrome-192x192.png" />
+  <meta property="og:image:width" content="192" />
+  <meta property="og:image:height" content="192" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta property="og:description" content="Российская молодёжная научная конференция с международным участием 
+  «Проблемы теоретической и экспериментальной химии» проводится ежегодно на базе Института естественных наук и математики УрФУ" />
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./shariff/shariff.complete.css">
+  <script src="./shariff/shariff.complete.js" defer></script>
+
+</head>
+
+<body>
+	<slot />
+	<footer>
+		<div  class="shariff" 
+					data-button-style="icon" 
+					data-lang="ru" 
+					data-url={thisPageURL} 
+					data-services="[&quot;telegram&quot;,&quot;whatsapp&quot;,&quot;vk&quot;]"></div>
+		<ul>
+			<li><a href={feedbackURL}>Обратная связь</a></li>
+			<li><a href="#">Наверх</a></li>
+		</ul>
+	</footer>
+</body>
+</html>
+
+<style is:global>
+* {
+  box-sizing: border-box;
+}
+:root {
+  font-family: "PT Sans", sans-serif;
+  --color-main: #067B0F;
+  --color-second: #E03214;
+  --color-third: #9C3E2D;
+}
+.material-icons {
+  font-size: 48px;
+  color: var(--color-third);
+}
+body, html {
+  margin: 0;
+  min-height: 100%;
+  min-width: 360px;
+}
+header, main, footer {
+  width: 100%;
+}
+main {
+	min-height: 100vh;
+}
+h1 {
+  font-size: max(1.8rem, 2vw);
+  margin: 1rem auto 0;
+  text-align: center;
+  line-height: 1;
+  max-width: 42ch;
+}
+h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 0;
+}
+h3 {
+  font-size: 1.3rem;
+  text-align: center;
+}
+h4 {
+  font-size: 1.2rem;
+  text-align: center;
+}
+section {
+  padding: 2rem 1rem;
+  scroll-margin-top: 2rem;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+section > * {
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#archive h3,
+#archive p,
+.centered {
+  text-align: center;
+}
+.list-container > ul {
+  display: inline-block;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  list-style-position: inside;
+}
+p, a.large-button {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+a.large-button {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: whitesmoke;
+  border-radius: 1rem;
+  border: 1px solid var(--color-main);
+}
+a.large-button:hover {
+  background-color: var(--color-main);
+  color: whitesmoke;
+  border: 1px solid var(--color-main);
+}
+a, a:visited {
+  text-decoration: none;
+  color: var(--color-second);
+}
+a:hover {
+  border: none;
+  color: var(--color-main);
+  border-bottom: 1px solid var(--color-main);
+}
+a[href^="tel:"]:before {
+  content: "\260e";
+  margin-right: 0.5em;
+}
+a[href^="mailto:"]:before {
+  content: "\2709";
+  margin-right: 0.5em;
+}
+main a[href^="http"]::after,
+main a[href^="https://"]::after
+{
+  content: "";
+  width: 11px;
+  height: 11px;
+  margin-left: 4px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z'/%3E%3Cpath fill-rule='evenodd' d='M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z'/%3E%3C/svg%3E");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: inline-block;
+}
+footer {
+  background: #423d3d;
+  padding: 0.5rem;
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: right;
+  gap: 1.5rem;
+}
+.shariff {
+  flex: 1 1 auto;
+}
+.shariff ul {
+  align-items: center;
+  justify-content: flex-end;
+}
+.shariff .orientation-horizontal li {
+  margin-bottom: 0;
+  text-align: center;
+}
+footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+footer li {
+  display: inline;
+  margin-left: 0.5em;
+}
+footer a:hover {
+  border: none;
+}
+footer a,
+footer a:visited {
+  color: white;
+}
+@media all and (max-width: 900px) {
+  section {
+    scroll-margin-top: 5rem;
+  }
+}
+@media all and (max-width: 470px) {
+  section {
+    scroll-margin-top: 2rem;
+  }
+}
+@media all and (max-width: 440px) {
+  .material-icons {
+    font-size: 36px;
+  }
+	footer li {
+		margin-left: 0;
+	}
+}
+</style>

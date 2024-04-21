@@ -1,0 +1,196 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import ConfProgram from '../components/ConfProgram.jsx'
+const pageTitle = "Программа конференции Проблемы теоретической и экспериментальной химии";
+
+import mammoth from "mammoth";
+import jsdom from 'jsdom';
+const { JSDOM } = jsdom;
+
+function parseDocxHTML(html) {
+	const doc = JSDOM.fragment(html);
+  const brs = doc.querySelectorAll('br');
+	brs.forEach((br) => br.remove());
+  const all = doc.childNodes;
+  let currentSection = '';
+  let currentSubsection = '';
+  let currentSectionNumber = -1; // the section numbering starts from zero
+  let currentSubsectionNumber = 0; // the subsection numbering starts from one, it's zero if there are no subsections
+  let currentType = '';
+  let posterNumberPrefix = '';
+  const allArray = Array.from(all);
+  const scheduleStartIndex = allArray.findIndex(e => e.tagName.toLowerCase() == 'h1' && e.textContent.toLowerCase().includes("расписание"));
+  const scheduleEndIndex = allArray.findIndex(e => e.tagName.toLowerCase() == 'h1' && e.textContent.toLowerCase().includes("секция"));
+  const scheduleHTML = allArray.slice(scheduleStartIndex, scheduleEndIndex).reduce((html, e) => (html + e.outerHTML), '');
+  //console.log(scheduleHTML);
+  all.forEach(e => {
+    switch (e.tagName.toLowerCase()) {
+      case 'h1':
+        currentSection = e.textContent[0].toUpperCase() + e.textContent.substring(1).toLowerCase();
+        const prefixes = {
+          'анал' : 'А',
+          'орган' : 'О',
+          'веществ' : 'Ф',
+          'полимер' : 'В'
+        }
+        for (const key in prefixes) {
+          if (currentSection.includes(key)) {
+            posterNumberPrefix = prefixes[key];
+            currentSectionNumber += 1;
+            currentSubsectionNumber = 0;
+            currentSubsection = '';
+            break;
+          }
+        }
+        break;
+      case 'h2':
+        if (e.textContent.toLowerCase().includes('пленар')) {
+          currentType = 'пленарный';
+        } else if (e.textContent.toLowerCase().includes('устн')) {
+          currentType = 'устный';
+        } else if (e.textContent.toLowerCase().includes('стен')) {
+          currentType = 'стендовый';
+        } else if (e.textContent.toLowerCase().includes('подсекция')) {
+          currentSubsection = e.textContent;
+          currentSubsectionNumber += 1;
+        }
+        break;
+      case 'ol':
+        let number = 1;
+        const numberPrefix = currentType == 'стендовый' ? `${posterNumberPrefix}-` : '';
+        for (const li of e.querySelectorAll('li')) {
+          const numberText = `${numberPrefix}${number++}`;
+          li.setAttribute('data-number', numberText);
+          li.setAttribute('data-type', currentType);
+          li.setAttribute('data-section', currentSection + (currentSubsection.length > 0 ? `, ${currentSubsection}` : ''));
+          li.setAttribute('data-section-number', currentSectionNumber);
+          li.setAttribute('data-subsection-number', currentSubsectionNumber);
+          li.className = 'presentation';
+        }
+        break;
+      case 'p':
+        if (currentType === 'пленарный' && e.textContent.trim().length > 0) {
+          e.setAttribute('data-number', 'П');
+          e.setAttribute('data-type', currentType);
+          e.setAttribute('data-section', currentSection + (currentSubsection.length > 0 ? `, ${currentSubsection}` : ''));
+          e.setAttribute('data-section-number', currentSectionNumber);
+          e.setAttribute('data-subsection-number', currentSubsectionNumber);
+          e.className = 'presentation';
+        }
+        break;
+      default:
+        break;
+    }
+  });
+	let pCollection = doc.querySelectorAll('.presentation');
+	let pArray = Array.from(pCollection);
+	return {presentations: pArray, schedule : scheduleHTML};
+}
+
+function parsePresentation(htmlFragment) {
+  function extractContent(s) {
+    const span = JSDOM.fragment(`<span>${s}</span>`);
+    return span.textContent.replace(/\u00A0/g, ' ');
+  }
+  let authorText = '';
+  let titleHTML = '';
+  let affilText = '';
+  try {
+    authorText = htmlFragment.querySelector('strong').textContent;
+    authorText = authorText.match(/[^\s\.,].+[^\s,]/)[0];
+    authorText = authorText.replace(/\u00A0/g, ' ');
+    const reTitle = new RegExp("([^\s\.,].+(?!<strong>)[^\s\.,])[\s\.,]*<strong>");
+    titleHTML = htmlFragment.innerHTML.match(reTitle)[1];
+    titleHTML = titleHTML.trim();
+    if (titleHTML[titleHTML.length - 1] == '.') {
+      titleHTML = titleHTML.substring(0, titleHTML.length - 1).trim();
+    }
+    const reAffil = new RegExp("</strong>[\s,\.]*([^\s\.,].+[^\s,\.])[\s,\.]*");
+    affilText = htmlFragment.innerHTML.match(reAffil)[1];
+    affilText = affilText.replace(/\u00A0/g, ' ');
+  } catch (error) {
+    console.error(`Error while parsing ${htmlFragment.innerHTML}:\n${error}`);
+  }
+  //console.log(extractContent(titleHTML));
+  let presentation = {
+    id: '',
+    number: htmlFragment.dataset.number,
+    type: htmlFragment.dataset.type,
+    //section: htmlFragment.dataset.section,
+    sectionNumber: parseInt(htmlFragment.dataset.sectionNumber),
+    subsectionNumber: parseInt(htmlFragment.dataset.subsectionNumber),
+    authors: authorText,
+    title: titleHTML,
+    titleText: extractContent(titleHTML),
+    affil: affilText
+  };
+  // here's a catch - no subsections for the posters
+  if (presentation.type === 'стендовый') {
+    presentation.subsectionNumber = 0;
+  }
+  presentation.id = `s${presentation.sectionNumber}-ss${presentation.subsectionNumber}-no${presentation.number}`;
+  return presentation;
+}
+
+const html = await mammoth.convertToHtml({path: "./src/components/Программа XXXIV.docx"})
+	.then(function(result){
+		let html = result.value; // The generated HTML
+		//console.log(`Then ${html}`);
+		let messages = result.messages; // Any messages, such as warnings during conversion
+		if (messages.length) {
+			console.log(messages);
+		}
+		return html;
+	})
+	.catch(function(error) {
+		console.error(error);
+	});
+
+const {schedule, presentations} = parseDocxHTML(html);
+const presentationObjects = presentations.map(p => parsePresentation(p));
+---
+
+<Layout title={pageTitle}>
+
+  <Navbar entries={{
+    'На главную' : Astro.url.origin,
+    'Расписание' : '#timetable',
+    'Доклады' : '#presentations'
+  }} sticky={true} withDots={false}/>
+
+	<main>
+    <section id="timetable" set:html={schedule}>
+    </section>
+    <section id="presentations">
+      <h1>Доклады</h1>
+      <ConfProgram client:load presentations={presentationObjects} />
+    </section>
+	</main>
+
+</Layout>
+
+<style is:global>
+  #timetable h1, 
+  #presentations h2 {
+    line-height: 1.1;
+  }
+  #timetable h1 + p {
+    text-align: center;
+  }
+</style>
+<style>
+  section {
+    max-width: 780px;
+    padding-top: 0;
+    scroll-margin-top: 5rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #timetable,
+  #presentations {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 1rem;
+  }
+</style>

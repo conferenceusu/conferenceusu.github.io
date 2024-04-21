@@ -1,0 +1,106 @@
+---
+const { entries={}, sticky=true, withDots=true } = Astro.props;
+---
+<nav id="nav-bar" class={sticky && 'sticky'}>
+  <a class="nav-menu-link" href="javascript:void(0);">Меню ▼</a>
+  <ul class={withDots && 'with-dots'}>
+    {Object.entries(entries).map(([name, href]) => (<li><a className="nav-link" href={href}>{name}</a></li>))}
+  </ul>
+</nav>
+
+<script>
+  'use strict';
+  const dropDown = (function() {
+    let menuDropped = false;
+    return (show = true) => {
+      if (!show) {
+        menuDropped = false;
+      } else {
+        menuDropped = !menuDropped;
+      }
+      let menuList = document.querySelector("nav ul");
+      let menuButton = document.querySelector("nav .nav-menu-link");
+      if (menuDropped) {
+        menuList.classList.add("dropdown");
+        menuButton.textContent = "Меню ▲";
+      } else {
+        menuList.classList.remove("dropdown");
+        menuButton.textContent = "Меню ▼";
+      }
+    };
+  })();
+  const navMenuLink = document.querySelector('#nav-bar .nav-menu-link');
+  const navLinks = document.querySelectorAll('#nav-bar li a');
+  navMenuLink.addEventListener('click', () => dropDown(true));
+  navLinks.forEach((navlink) => {
+    navlink.addEventListener('click', () => dropDown(false));
+  });
+</script>
+
+<style>
+nav {
+  width: 100%;
+  padding: 0.3rem;
+  background: linear-gradient(white, whitesmoke);
+  box-shadow: 0 2px 2px 0 lightgray;
+}
+nav.sticky {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  margin: 0 auto;
+  padding: 0;
+}
+nav li {
+  margin: 0.5rem 0;
+}
+nav ul.with-dots:before,
+nav ul.with-dots:after {
+  content: "";
+  margin-top: 3px;
+  border-bottom: 2px dotted var(--color-second);
+  flex: 1 1 0;
+}
+nav a {
+  font-size: 1.3rem;
+  padding: 0.4rem;
+  border-radius: 8px;
+  border: none;
+  text-align: center;
+}
+nav a:hover {
+  border: none;
+  background-color: var(--color-main);
+  color: ghostwhite;
+}
+.nav-menu-link {
+  display: none;
+}
+@media all and (max-width: 900px) {
+  nav ul.with-dots:before,
+  nav ul.with-dots:after {
+    content: none;
+  }
+}
+@media all and (max-width: 470px) {
+  nav ul {
+    display: none;
+  }
+  nav ul.dropdown {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .nav-menu-link {
+    display: block;
+  }
+}
+</style>

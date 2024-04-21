@@ -1,0 +1,311 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Calendar from '../components/Calendar.astro';
+import Navbar from '../components/Navbar.astro';
+const pageTitle = "Проблемы теоретической и экспериментальной химии";
+
+import {Content as OrgCommittee} from '../content/committees/OrgCommittee.md';
+import {Content as ProgCommittee} from '../content/committees/ProgCommittee.md';
+import {Content as Sections} from '../content/info/Sections.md';
+import {Content as Archive} from '../content/info/Archive.md';
+---
+
+<Layout title={pageTitle}>
+  <header>
+    <div class="logo-wrap">
+      <img class="header-img insma-logo" height="128" width="300" alt="insma-logo" src="./img/insmalogo.png">
+      <img class="header-img conf-logo" height="128" width="128" alt="conf-logo" src="./img/conflogotransparent.png">
+    </div>
+    <h1>XXXIV Российская молодёжная научная конференция с международным участием «Проблемы теоретической и экспериментальной химии»</h1>
+  </header>
+
+  <Navbar entries={{'Информация' : "#info",
+                    'Даты' : "#dates",
+                    'Регистрация и оргвзнос' : "#register",
+                    'Оформление тезисов' : "#abstracts",
+                    'Оргкомитет' : "#committee",
+                    'Архив' : "#archive"
+  }} />
+
+  <main>
+    <section id="info">
+      <h2>Общая информация</h2>
+      <p><a href="/prog" class="button large-button">Программа конференции</a></p>
+      <div class="info-item">
+        <span class="material-icons">info</span>
+        <p>Уважаемые коллеги! Приглашаем вас принять участие в XXXIV Российской молодёжной научной конференции с международным участием «Проблемы теоретической и экспериментальной химии», посвященной 190-летию со дня рождения Д.И. Менделеева.</p>
+      </div>
+      <div class="info-item">
+        <span class="material-icons">place</span>
+        <p>Конференция проводится в г. Екатеринбурге в <a href="https://insma.urfu.ru" target="_blank">Институте естественных наук и математики</a> (см. <a href="https://goo.gl/maps/xfh4kpsY2ZwQcyvZA" target="_blank">Куйбышева, 48</a> на карте) Уральского федерального университета. Организаторы конференции: <a href="https://urfu.ru" target="_blank">Уральский федеральный университет</a> и Уральское отделение РАН.</p>
+      </div>
+      <div class="info-item">
+        <span class="material-icons">event</span>
+        <p>Конференция состоится <a href="#dates">23-26 апреля 2024 года</a>.</p>
+      </div>
+      <div class="info-item">
+        <span class="material-icons">language</span>
+        <p>Рабочими языками конференции являются русский и английский.</p>
+      </div>
+      <div class="info-item">
+        <span class="material-icons">attach_file</span>
+        <p><a target="_blank" href="https://insma.urfu.ru/fileadmin/user_upload/site_32133/IENiM/chem_ruten/2024/Cirkuljar1_2024.pdf">Скачать информационное письмо</a> (pdf, &lt;0.4 Mb)</p>
+      </div>
+      <h3>Тематика конференции (научные секции)</h3>
+      <div class="info-item">
+        <span class="material-icons">fact_check</span>
+        <p>Обратите внимание, что с этого года мы изменили научные секции. Ниже перечислены обновленные названия секций и описаны в общих чертах <em>приблизительные</em> направления научных исследований, соответствующих тематикам конкретных секций.</p>
+      </div>
+      <div class="list-container centered">
+        <Sections />
+      </div>
+    </section>
+
+    <section id="dates">
+      <h2>Основные даты</h2>
+      <div class="list-container centered">
+        <ul>
+          <li><strong>17 января 2024 года</strong> – начало онлайн-регистрации и приема тезисов докладов</li>
+          <li><strong>04 марта</strong> – окончание онлайн-регистрации и приема тезисов докладов</li>
+          <li><strong>03 апреля</strong> – окончание приема оргвзноса</li>
+          <li><strong>23 апреля</strong> – регистрация участников, открытие конференции и пленарные доклады</li>
+          <li><strong>24 апреля</strong> – секционные заседания (устные доклады)</li>
+          <li><strong>25 апреля</strong> – секционные заседания (стендовые доклады)</li>
+          <li><strong>26 апреля</strong> – закрытие конференции</li>
+        </ul>
+      </div>
+      <Calendar />
+    </section>
+
+
+    <section id="register">
+      <h2>Регистрация и оплата оргвзноса</h2>
+      <p>Для участия в работе конференции необходимо:</p>
+      <div class="info-item">
+        <span class="material-icons">login</span>
+        <p>Заранее (<a href="#dates">см. даты</a>) зарегистрироваться по следующей ссылке <a href="https://scievent.urfu.ru/conferenceusuRu" target="_blank">на портале научных мероприятий УрФУ</a>.</p>
+      </div>
+      <div class="info-item">
+        <span class="material-icons">email</span>
+        <p>Оформить тезисы докладов в соответствии с <a href="#abstracts">установленной формой</a> и прикрепить файл тезисов <a href="https://scievent.urfu.ru/conferenceusuRu" target="_blank">на портале научных мероприятий УрФУ</a>. Это можно сделать как во время регистрации участника, так и после отправки регистрационной формы.
+        </p>
+      </div>
+      <div class="info-item">
+        <span class="material-icons">payment</span>
+        <p>После включения докладов в программу конференции необходимо оплатить организационный взнос в зависимости от типа участия. Тезисы докладов участников, не оплативших оргвзнос, публиковаться не будут. Сотрудники, аспиранты и студенты Уральского федерального университета освобождены от уплаты оргвзноса. <br /> Стоимость оргвзноса приведена ниже. Подробная информация о порядке оплаты оргвзноса будет предоставлена зарегистрированным пользователям позже.</p>
+      </div>
+      <div class="fees-container">
+        <div class="fees-card">
+          <h3>Доклад</h3>
+          <div class="fee">1000 ₽</div>
+          <span class="material-icons">shopping_cart</span>
+          <p>Очные (устные или стендовые) доклады</p>
+        </div>
+        <div class="fees-card">
+          <h3>Заочно</h3>
+          <div class="fee">700 ₽</div>
+          <span class="material-icons">savings</span>
+          <p>Заочное участие</p>
+        </div>
+        <div class="fees-card">
+          <h3>УрФУ</h3>
+          <div class="fee">0 ₽</div>
+          <span class="material-icons">credit_card_off</span>
+          <p>Сотрудники, аспиранты и студенты УрФУ</p>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="abstracts">
+      <h2>Оформление тезисов</h2>
+      <p>Тезисы необходимо оформлять в соответствии с шаблоном:</p>
+      <a href="./docs/abstract-conferenceusu.docx" class="button large-button">Скачать шаблон тезисов (*.docx)</a>
+      <p>По материалам конференции будет издан сборник тезисов докладов. По окончании конференции полная версия сборника тезисов будет размещена на сайте конференции. Напоминаем, что тезисы докладов участников, не оплативших оргвзнос, публиковаться не будут (за исключением сотрудников, аспирантов и студентов УрФУ). Лучшие доклады будут рекомендованы для издания в виде статей в специальном выпуске журнала <a href="http://chimicatechnoacta.ru" target="_blank">Chimica Techno Acta</a>, входящем в международную базу данных Scopus.</p>
+    </section>
+
+
+    <section id="committee">
+      <h2>Оргкомитет и контакты</h2>
+      <p class="centered"><a href="mailto:ConferenceUSU@yandex.ru">ConferenceUSU@yandex.ru</a></p>
+      <p>Адрес: 620000, г. Екатеринбург, пр. Ленина, 51, Уральский федеральный университет, Институт естественных наук и математики, кафедра физической и неорганической химии, <br />тел.: <a href="tel:+73433899494">(343) 389-95-84</a></p>
+      <p>Помимо сайта, общее информирование участников конференции также производится при помощи рассылки (@urfu.email). Подписаться на рассылку в настоящее время можно только по запросу. Отписаться можно, отправив пустое письмо с темой "unsubscribe conferenceusu" (без кавычек) на <a href="mailto:sympa@urfu.email?subject=unsubscribe%20conferenceusu">sympa@urfu.email</a>.</p>
+      <h3>Оргкомитет</h3>
+      <div class="committee-wrapper">
+        <div class="committee-card">
+          <h4>Председатель</h4>
+          <img width="250" height="275" alt="Председатель" src="./img/chairman.jpg">
+          <p><strong>Черепанов Владимир Александрович</strong></p>
+          <p>д.х.н., профессор,заведующий кафедрой физической и неорганической химии ИЕНиМ УрФУ</p>
+        </div>
+        <div class="committee-card">
+          <h4>Отв. секретарь</h4>
+          <img width="256" height="275" alt="Секретарь" src="./img/secretary.jpg">
+          <p><strong>Волкова Надежда Евгеньевна</strong></p>
+          <p>к.х.н., доцент кафедры физической и неорганической химии ИЕНиМ УрФУ</p>
+        </div>
+      </div>
+      <h3>Члены оргкомитета</h3>
+      <div class="list-container">
+        <OrgCommittee />
+      </div>
+      <h3>Программный комитет</h3>
+      <h4>Председатель:</h4>
+      <div class="list-container">
+        <ul>
+          <li><strong>Анимица И.Е.</strong>, д.х.н., профессор кафедры физической и неорганической химии ИЕНиМ УрФУ</li>
+        </ul>
+      </div>
+      <h4>Заместитель председателя:</h4>
+      <div class="list-container">
+        <ul>
+          <li><strong>Сафронов А.П.</strong>, д.ф.-м.н., профессор департамента фундаментальной и прикладной химии ИЕНиМ УрФУ</li>
+        </ul>
+      </div>
+      <h4>Члены программного комитета:</h4>
+      <div class="list-container">
+        <ProgCommittee />
+      </div>
+    </section>
+
+
+    <section id="archive">
+      <h2>Архив</h2>
+      <Archive />
+    </section>
+  </main>
+  
+</Layout>
+
+<style>
+header {
+  background: white;
+  padding: 1rem;
+}
+.logo-wrap {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.header-img {
+  height: auto;
+  max-width: 300px;
+}
+.insma-logo {
+  max-width: 400px;
+  flex: 2 0 300px;
+}
+.conf-logo {
+  max-width: 256px;
+  flex: 1 0 200px;
+}
+#info {
+  background-color: white;
+}
+#dates {
+  background-color: linen;
+}
+#register {
+  background-color: white;
+}
+#abstracts {
+  background-color: linen;
+}
+#committee {
+  background-color: white;
+}
+#archive {
+  background-color: linen;
+}
+.info-item {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+.info-item > :nth-child(2) {
+  margin-left: 1rem;
+}
+.committee-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  max-width: none;
+}
+.committee-card {
+  width: 256px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 2px solid darkgrey;
+  border-radius: 5px;
+}
+.committee-card h4 {
+  background: lightgray;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 1rem 0;
+  border-bottom: 1px solid darkgrey;
+}
+.committee-card img {
+  width: 100%;
+  max-height: 275px;
+  object-fit: cover;
+  object-position: bottom;
+}
+.committee-card p {
+  margin: 0.2rem;
+}
+.fees-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+.fees-card {
+  flex-basis: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid var(--color-main);
+  border-radius: 5px;
+  text-align: center;
+}
+.fees-card > * {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.fee {
+  font-size: 1.5rem;
+}
+.fees-card .pay-button {
+  font-size: 1.1rem;
+  font-weight: bold;
+  width: 100%;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: var(--color-second);
+  background-color: whitesmoke;
+  text-transform: uppercase;
+  margin-top: auto;
+}
+.fees-card .pay-button:hover {
+  background-color: var(--color-main);
+  color: whitesmoke;
+}
+.fees-card .pay-button[disabled="true"],
+.fees-card .pay-button[disabled="true"]:hover {
+  color: lightslategray;
+  background-color: whitesmoke;
+  cursor: not-allowed;
+  /*pointer-events: none;*/
+}
+</style>
