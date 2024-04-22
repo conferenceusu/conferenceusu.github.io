@@ -126,5 +126,6 @@ option {
 
 .presentation__affil {
   justify-self: end;
+  text-align: right;
   font-size: 0.9em;
 }
