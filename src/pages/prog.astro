@@ -160,8 +160,8 @@ const presentationObjects = presentations.map(p => parsePresentation(p));
   }} sticky={true} withDots={false}/>
 
 	<main>
-    <section id="timetable" set:html={schedule}>
-    </section>
+    <section id="info">Программа и расписание конференции на этой странице автоматически сгенерированы из наиболее актуального <a href="https://github.com/conferenceusu/conferenceusu.github.io/raw/master/src/components/%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%20XXXIV.docx">файла программы конференции</a>, поэтому информация в них абсолютно идентична. <a href="#presentations">Интерактивная часть</a> программы немножко экспериментальная и может не работать в совсем старых браузерах, но вы всегда сможете скачать файл. Настройки фильтра и отмеченные вами доклады сохранятся в вашем браузере, если вы не в режиме инкогнито. Желаем вам успешного участия в конференции!</section>
+    <section id="timetable" set:html={schedule}></section>
     <section id="presentations">
       <h1>Доклады</h1>
       <ConfProgram client:load presentations={presentationObjects} />
@@ -171,6 +171,9 @@ const presentationObjects = presentations.map(p => parsePresentation(p));
 </Layout>
 
 <style is:global>
+  #timetable h1 {
+    margin-top: 0;
+  }
   #timetable h1, 
   #presentations h2 {
     line-height: 1.1;
@@ -189,11 +192,17 @@ const presentationObjects = presentations.map(p => parsePresentation(p));
   }
 </style>
 <style>
+  h1 {
+    margin-top: 0;
+  }
   section {
     max-width: 780px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+  }
+  #info {
+    padding-bottom: 0;
   }
 </style>
