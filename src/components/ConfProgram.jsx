@@ -15,6 +15,7 @@ function createMarkup(html) {
 }
 
 function storageAvailable(type) {
+    //copied 'as is' from MDN
     let storage;
     try {
       storage = window[type];
@@ -42,10 +43,6 @@ function storageAvailable(type) {
 }
 
 function PresentationCard({ presentation, checked, onCheck }) {
-    //const [checked, setChecked] = useState(false);
-    //const id = `${presentation.number}-${presentation.section.replaceAll(' ', '-')}`
-    //checked={presentation.checked ? true : false} 
-    //onChange={c => (presentation.checked = c.target.checked)}
     const presentationTypeClasses = {
         'пленарный' : 'presentation--plenary',
         'устный' : 'presentation--oral',
@@ -68,7 +65,7 @@ function PresentationCard({ presentation, checked, onCheck }) {
                    onChange={c => onCheck(c.target.checked, presentation.id)} />
         </span>
         </div>
-    );//<span>{presentation.sectionNumber}-{presentation.subsectionNumber}</span>
+    );
 }
 
 function FilteredProgram({ presentations, filter, checkedPresentations, onCheckPresentation }) {
@@ -128,8 +125,6 @@ export default function ConfProgram({ presentations }) {
                 setCheckedPresentations(JSON.parse(storedCheckedOnes));
             }
         }
-        //console.log("mounted");
-        //console.log(filter);
     }, []);
     function handleFilter(newFilter) {
         if (storageAvailable("localStorage")) {

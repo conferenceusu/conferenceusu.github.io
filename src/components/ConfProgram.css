@@ -43,7 +43,6 @@ select {
   -o-white-space: pre-wrap;
   white-space: pre-wrap;
   text-overflow: ellipsis;
-  /*TODO: SET UP MEDIA QUIERIES*/
 }
 
 option {

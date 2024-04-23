@@ -23,7 +23,6 @@ function parseDocxHTML(html) {
   const scheduleStartIndex = allArray.findIndex(e => e.tagName.toLowerCase() == 'h1' && e.textContent.toLowerCase().includes("расписание"));
   const scheduleEndIndex = allArray.findIndex(e => e.tagName.toLowerCase() == 'h1' && e.textContent.toLowerCase().includes("секция"));
   const scheduleHTML = allArray.slice(scheduleStartIndex, scheduleEndIndex).reduce((html, e) => (html + e.outerHTML), '');
-  //console.log(scheduleHTML);
   all.forEach(e => {
     switch (e.tagName.toLowerCase()) {
       case 'h1':
@@ -121,12 +120,10 @@ function parsePresentation(htmlFragment) {
   } catch (error) {
     console.error(`Error while parsing ${htmlFragment.innerHTML}:\n${error}`);
   }
-  //console.log(extractContent(titleHTML));
   let presentation = {
     id: '',
     number: htmlFragment.dataset.number,
     type: htmlFragment.dataset.type,
-    //section: htmlFragment.dataset.section,
     sectionNumber: parseInt(htmlFragment.dataset.sectionNumber),
     subsectionNumber: parseInt(htmlFragment.dataset.subsectionNumber),
     authors: authorsHTML,
@@ -152,7 +149,6 @@ let mammothOptions = {
 const html = await mammoth.convertToHtml({path: "./src/components/Программа XXXIV.docx"}, mammothOptions)
 	.then(function(result){
 		let html = result.value; // The generated HTML
-		//console.log(`Then ${html}`);
 		let messages = result.messages; // Any messages, such as warnings during conversion
 		if (messages.length) {
 			console.log(messages);
