@@ -57,7 +57,7 @@ function PresentationCard({ presentation, checked, onCheck }) {
         <div id={presentation.id} class={presentationClass}>
         <span class="presentation__number">{presentation.number}</span>
         <span class="presentation__title" dangerouslySetInnerHTML={createMarkup(presentation.title)}></span>
-        <span class="presentation__authors">{presentation.authors}</span>
+        <span class="presentation__authors" dangerouslySetInnerHTML={createMarkup(presentation.authors)}></span>
         <span class="presentation__affil">{presentation.affil}</span>
         <span class="check presentation__check">
             <label htmlFor={checkboxID}>Отметить</label>
@@ -79,7 +79,7 @@ function FilteredProgram({ presentations, filter, checkedPresentations, onCheckP
         (filter.section === -1 || filter.section === a.sectionNumber) &&
         (filter.subsection === 0 || filter.subsection === a.subsectionNumber || a.subsectionNumber === 0) &&
         (filter.type === 'все' || filter.type === a.type) &&
-        (isSubstring(a.number) || isSubstring(a.titleText) || isSubstring(a.authors)));
+        (isSubstring(a.number) || isSubstring(a.titleText) || isSubstring(a.authorsText)));
     const elements = [];
     let lastSectionNumber = null;
     let lastSubsectionNumber = null;
@@ -190,7 +190,7 @@ export default function ConfProgram({ presentations }) {
             <div class="filter-wrapper">
                 <input class="filter-input"
                        type="text"
-                       placeholder="фильтр докладов"
+                       placeholder="фильтр (№, авторы или название)"
                        value={filter.text}
                        onInput={e => handleFilterText(e.target.value)}
                        onKeyUp={e => {

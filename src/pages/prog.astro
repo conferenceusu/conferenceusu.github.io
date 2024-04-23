@@ -9,7 +9,7 @@ import jsdom from 'jsdom';
 const { JSDOM } = jsdom;
 
 function parseDocxHTML(html) {
-	const doc = JSDOM.fragment(html);
+	const doc = JSDOM.fragment(html.replace(/\u00A0/g, ' '));
   const brs = doc.querySelectorAll('br');
 	brs.forEach((br) => br.remove());
   const all = doc.childNodes;
@@ -93,13 +93,23 @@ function parsePresentation(htmlFragment) {
     const span = JSDOM.fragment(`<span>${s}</span>`);
     return span.textContent.replace(/\u00A0/g, ' ');
   }
-  let authorText = '';
+  let authorsHTML = '';
+  let authorsText = '';
   let titleHTML = '';
   let affilText = '';
   try {
-    authorText = htmlFragment.querySelector('strong').textContent;
-    authorText = authorText.match(/[^\s\.,].+[^\s,]/)[0];
-    authorText = authorText.replace(/\u00A0/g, ' ');
+    const authorElement = htmlFragment.querySelector('strong');
+    authorsText = authorElement.textContent.match(/[^\s\.,].+[^\s,]/)[0];
+    const authorsList = authorsText.split(', ');
+    const underlinedAuthorElement = authorElement.getElementsByTagName('u')[0];
+    authorsHTML = authorsList.reduce((accum, val, index) => {
+      const prefix = index === 0 ? '' : ', ';
+      if (underlinedAuthorElement && underlinedAuthorElement.textContent === val) {
+        return accum += `${prefix}<u>${val}</u>`;
+      } else {
+        return accum += `${prefix}${val}`;
+      }
+    }, '');
     const reTitle = new RegExp("([^\s\.,].+(?!<strong>)[^\s\.,])[\s\.,]*<strong>");
     titleHTML = htmlFragment.innerHTML.match(reTitle)[1];
     titleHTML = titleHTML.trim();
@@ -108,7 +118,6 @@ function parsePresentation(htmlFragment) {
     }
     const reAffil = new RegExp("</strong>[\s,\.]*([^\s\.,].+[^\s,\.])[\s,\.]*");
     affilText = htmlFragment.innerHTML.match(reAffil)[1];
-    affilText = affilText.replace(/\u00A0/g, ' ');
   } catch (error) {
     console.error(`Error while parsing ${htmlFragment.innerHTML}:\n${error}`);
   }
@@ -120,7 +129,8 @@ function parsePresentation(htmlFragment) {
     //section: htmlFragment.dataset.section,
     sectionNumber: parseInt(htmlFragment.dataset.sectionNumber),
     subsectionNumber: parseInt(htmlFragment.dataset.subsectionNumber),
-    authors: authorText,
+    authors: authorsHTML,
+    authorsText: authorsText,
     title: titleHTML,
     titleText: extractContent(titleHTML),
     affil: affilText
@@ -133,7 +143,13 @@ function parsePresentation(htmlFragment) {
   return presentation;
 }
 
-const html = await mammoth.convertToHtml({path: "./src/components/Программа XXXIV.docx"})
+let mammothOptions = {
+    styleMap: [
+        "u => u"
+    ]
+};
+
+const html = await mammoth.convertToHtml({path: "./src/components/Программа XXXIV.docx"}, mammothOptions)
 	.then(function(result){
 		let html = result.value; // The generated HTML
 		//console.log(`Then ${html}`);

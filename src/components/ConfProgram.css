@@ -109,6 +109,10 @@ option {
   font-style: italic;
 }
 
+.presentation__authors u {
+  text-decoration: underline;
+}
+
 .presentation__authors,
 .presentation__affil,
 .presentation__check {
