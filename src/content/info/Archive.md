@@ -3,6 +3,12 @@
 ---
 Помимо полных выпусков, также можно найти отдельные тезисы в [электронном научном архиве УрФУ](https://elar.urfu.ru/) (попробуйте поиск по авторам или названию).
 
+### 2024 (XXXIV Российская молодежная конференция)
+
+[Сборник](https://elar.urfu.ru/bitstream/10995/139321/1/978-5-7996-3916-7_2024.pdf) (pdf, 8.6 Mb)
+
+[Программа](https://github.com/conferenceusu/conferenceusu.github.io/raw/master/src/components/%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%20XXXIV.docx) (docx, 0.2 Mb)
+
 ### 2023 (XXXIII Российская молодежная конференция)
 
 [Сборник](https://elar.urfu.ru/bitstream/10995/124839/1/978-5-7996-3703-3_2023.pdf) (pdf, 13.4 Mb)
