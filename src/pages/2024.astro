@@ -1,23 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Calendar from '../components/Calendar.astro';
+import Calendar from '../components/Calendar2024.astro';
 import Navbar from '../components/Navbar.astro';
 const pageTitle = "Проблемы теоретической и экспериментальной химии";
 
-import {Content as OrgCommittee} from '../content/committees/OrgCommittee2025.md';
-import {Content as ProgCommittee} from '../content/committees/ProgCommittee2025.md';
+import {Content as OrgCommittee} from '../content/committees/OrgCommittee2024.md';
+import {Content as ProgCommittee} from '../content/committees/ProgCommittee2024.md';
 import {Content as Sections} from '../content/info/Sections.md';
 import {Content as Archive} from '../content/info/Archive.md';
-import {Content as Dates} from '../content/info/Dates2025.md';
 ---
 
 <Layout title={pageTitle}>
   <header>
     <div class="logo-wrap">
       <img class="header-img insma-logo" height="128" width="300" alt="insma-logo" src="/img/insmalogo.png">
-      <img class="header-img conf-logo" height="128" width="128" alt="conf-logo" src="/img/conflogo2025.png">
+      <img class="header-img conf-logo" height="128" width="128" alt="conf-logo" src="/img/conflogo2024.png">
     </div>
-    <h1>XXXV Российская молодёжная научная конференция с международным участием «Проблемы теоретической и экспериментальной химии»</h1>
+    <h1>XXXIV Российская молодёжная научная конференция с международным участием «Проблемы теоретической и экспериментальной химии»</h1>
   </header>
 
   <Navbar entries={{'Информация' : "#info",
@@ -32,12 +31,18 @@ import {Content as Dates} from '../content/info/Dates2025.md';
     <section id="info">
       <h2>Общая информация</h2>
       <div class="info-item">
-        <span class="material-icons">priority_high</span>
-        <p>Информация о прошедшей XXXIV конференции (2024) в <a href="#archive">архиве</a>.</p>
+        <span class="material-icons">bookmark</span>
+        <p>Это архивная страница, посвященная одной из прошедших конференций. Информация о будущей конференции доступна <a href='/'>на главной странице</a>.</p>
       </div>
       <div class="info-item">
+        <span class="material-icons">priority_high</span>
+        <p>Уважаемые участники конференции! По ссылкам ниже для вас доступны программа, сборник тезисов и расписание работы XXXIV конференции (2024). Если вам нужны отдельные страницы с тезисами и ссылки на них, можно поискать их в <a href="https://elar.urfu.ru/">электронном научном архиве УрФУ</a> (<a href="http://elar.urfu.ru/handle/10995/139321">полная версия сборника</a> там тоже есть).</p>
+      </div>
+      <p><a href="/prog" class="button large-button">Программа конференции</a></p>
+      <p><a href="https://elar.urfu.ru/bitstream/10995/139321/1/978-5-7996-3916-7_2024.pdf" class="button large-button">Сборник (pdf, ~8.6 Mb)</a></p>
+      <div class="info-item">
         <span class="material-icons">info</span>
-        <p>Уважаемые коллеги! Приглашаем вас принять участие в XXXV Российской молодёжной научной конференции с международным участием «Проблемы теоретической и экспериментальной химии», посвященной 165-летию со дня рождения Н.С. Курнакова.</p>
+        <p>Уважаемые коллеги! Приглашаем вас принять участие в XXXIV Российской молодёжной научной конференции с международным участием «Проблемы теоретической и экспериментальной химии», посвященной 190-летию со дня рождения Д.И. Менделеева.</p>
       </div>
       <div class="info-item">
         <span class="material-icons">place</span>
@@ -45,7 +50,7 @@ import {Content as Dates} from '../content/info/Dates2025.md';
       </div>
       <div class="info-item">
         <span class="material-icons">event</span>
-        <p>Конференция состоится <a href="#dates">22-25 апреля 2025 года</a>.</p>
+        <p>Конференция состоится <a href="#dates">23-26 апреля 2024 года</a>.</p>
       </div>
       <div class="info-item">
         <span class="material-icons">language</span>
@@ -53,9 +58,13 @@ import {Content as Dates} from '../content/info/Dates2025.md';
       </div>
       <div class="info-item">
         <span class="material-icons">attach_file</span>
-        <p><a target="_blank" href="/docs/confRu-info-1-2025.pdf">Скачать информационное письмо</a> (pdf, &lt;0.4 Mb)</p>
+        <p><a target="_blank" href="https://insma.urfu.ru/fileadmin/user_upload/site_32133/IENiM/chem_ruten/2024/Cirkuljar1_2024.pdf">Скачать информационное письмо</a> (pdf, &lt;0.4 Mb)</p>
       </div>
       <h3>Тематика конференции (научные секции)</h3>
+      <div class="info-item">
+        <span class="material-icons">fact_check</span>
+        <p>Обратите внимание, что с этого года мы изменили научные секции. Ниже перечислены обновленные названия секций и описаны в общих чертах <em>приблизительные</em> направления научных исследований, соответствующих тематикам конкретных секций.</p>
+      </div>
       <div class="list-container centered">
         <Sections />
       </div>
@@ -64,9 +73,17 @@ import {Content as Dates} from '../content/info/Dates2025.md';
     <section id="dates">
       <h2>Основные даты</h2>
       <div class="list-container centered">
-        <Dates />
+        <ul>
+          <li><strong>17 января 2024 года</strong> – начало онлайн-регистрации и приема тезисов докладов</li>
+          <li><strong>04 марта</strong> – окончание онлайн-регистрации и приема тезисов докладов</li>
+          <li><strong>03 апреля</strong> – окончание приема оргвзноса</li>
+          <li><strong>23 апреля</strong> – регистрация участников, открытие конференции и пленарные доклады</li>
+          <li><strong>24 апреля</strong> – секционные заседания (устные доклады)</li>
+          <li><strong>25 апреля</strong> – секционные заседания (стендовые доклады)</li>
+          <li><strong>26 апреля</strong> – закрытие конференции</li>
+        </ul>
       </div>
-      <Calendar year="2025" importantDates="25.12.24 28.2 5.4 22.4 23.4 24.4 25.4" />
+      <Calendar />
     </section>
 
 
@@ -75,11 +92,11 @@ import {Content as Dates} from '../content/info/Dates2025.md';
       <p>Для участия в работе конференции необходимо:</p>
       <div class="info-item">
         <span class="material-icons">login</span>
-        <p>Заранее (<a href="#dates">см. даты</a>) зарегистрироваться по следующей ссылке <a href="https://scievent.urfu.ru/conferenceusuRu2025" target="_blank">на портале научных мероприятий УрФУ</a>.</p>
+        <p>Заранее (<a href="#dates">см. даты</a>) зарегистрироваться по следующей ссылке <a href="https://scievent.urfu.ru/conferenceusuRu" target="_blank">на портале научных мероприятий УрФУ</a>.</p>
       </div>
       <div class="info-item">
         <span class="material-icons">email</span>
-        <p>Оформить тезисы докладов в соответствии с <a href="#abstracts">установленной формой</a> и прикрепить файл тезисов <a href="https://scievent.urfu.ru/conferenceusuRu2025" target="_blank">на портале научных мероприятий УрФУ</a>. Это можно сделать как во время регистрации участника, так и после отправки регистрационной формы.
+        <p>Оформить тезисы докладов в соответствии с <a href="#abstracts">установленной формой</a> и прикрепить файл тезисов <a href="https://scievent.urfu.ru/conferenceusuRu" target="_blank">на портале научных мероприятий УрФУ</a>. Это можно сделать как во время регистрации участника, так и после отправки регистрационной формы.
         </p>
       </div>
       <div class="info-item">
@@ -89,13 +106,13 @@ import {Content as Dates} from '../content/info/Dates2025.md';
       <div class="fees-container">
         <div class="fees-card">
           <h3>Доклад</h3>
-          <div class="fee">1200 ₽</div>
+          <div class="fee">1000 ₽</div>
           <span class="material-icons">shopping_cart</span>
           <p>Очные (устные или стендовые) доклады</p>
         </div>
         <div class="fees-card">
           <h3>Заочно</h3>
-          <div class="fee">800 ₽</div>
+          <div class="fee">700 ₽</div>
           <span class="material-icons">savings</span>
           <p>Заочное участие</p>
         </div>
@@ -132,9 +149,9 @@ import {Content as Dates} from '../content/info/Dates2025.md';
         </div>
         <div class="committee-card">
           <h4>Отв. секретарь</h4>
-          <img width="256" height="275" alt="Секретарь" src="/img/secretary2025.jpg">
-          <p><strong>Мазурин Максим Олегович</strong></p>
-          <p>к.х.н., ассистент департамента фундаментальной и прикладной химии ИЕНиМ УрФУ</p>
+          <img width="256" height="275" alt="Секретарь" src="/img/secretary2024.jpg">
+          <p><strong>Волкова Надежда Евгеньевна</strong></p>
+          <p>к.х.н., доцент кафедры физической и неорганической химии ИЕНиМ УрФУ</p>
         </div>
       </div>
       <h3>Члены оргкомитета</h3>
@@ -142,6 +159,19 @@ import {Content as Dates} from '../content/info/Dates2025.md';
         <OrgCommittee />
       </div>
       <h3>Программный комитет</h3>
+      <h4>Председатель:</h4>
+      <div class="list-container">
+        <ul>
+          <li><strong>Анимица И.Е.</strong>, д.х.н., профессор кафедры физической и неорганической химии ИЕНиМ УрФУ</li>
+        </ul>
+      </div>
+      <h4>Заместитель председателя:</h4>
+      <div class="list-container">
+        <ul>
+          <li><strong>Сафронов А.П.</strong>, д.ф.-м.н., профессор департамента фундаментальной и прикладной химии ИЕНиМ УрФУ</li>
+        </ul>
+      </div>
+      <h4>Члены программного комитета:</h4>
       <div class="list-container">
         <ProgCommittee />
       </div>
@@ -236,7 +266,7 @@ header {
   width: 100%;
   max-height: 275px;
   object-fit: cover;
-  object-position: center;
+  object-position: bottom;
 }
 .committee-card p {
   margin: 0.2rem;

@@ -1,0 +1,125 @@
+---
+import type { Code } from "astro:components";
+
+const { month, year, importantDates } = Astro.props;
+//the month is 1-indexed
+const daysOfTheWeek = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+function daysInMonth (month, year) {
+  return new Date(year, month, 0).getDate();
+}
+function firstDayWeekDay(month, year) {
+  //returns 0-indexed weekday starting from 0 for Monday
+  let day = new Date(year, month - 1, 1).getDay();
+  day = (day == 0) ? 6 : day - 1;
+  return day;
+}
+function placeholders(month, year) {
+  let ph = [];
+  for (let i = 0; i < firstDayWeekDay(month, year); i++) {
+    ph.push('div');
+  }
+  return ph;
+}
+function dates(month, year) {
+  let d = [...Array(daysInMonth(month, year)).keys()];
+  return d.map(val => val + 1);
+}
+const importantDateArray = importantDates.split(' ');
+function isImportant(day, month, year) {
+  const shortYear = year.toString().slice(2);
+  const dateWithYear = `${day}.${month}.${shortYear}`;
+  const dateWithoutYear = `${day}.${month}`;
+  return ((importantDateArray.indexOf(dateWithYear) >= 0) || (importantDateArray.indexOf(dateWithoutYear) >= 0));
+}
+const monthClasses = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+const monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+---
+
+<div class={`calendar ${monthClasses[month - 1]}`}>
+  <div class="calendar__picture">
+    <h3>{monthNames[month - 1]} {year}</h3>
+  </div>
+  <div class="calendar__date">
+    {daysOfTheWeek.map((day) => (
+      <div class="calendar__day">{day}</div>
+    ))}
+    {placeholders(month, year).map(() => (
+      <div></div>
+    ))}
+    {dates(month, year).map((date) => (
+      <div class={`calendar__number${isImportant(date, month, year) ? ' calendar__number--important' : ''}`}>{date}</div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .january .calendar__picture {
+    background: #262626 url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Winter_Landscape%2C_Holland_MET_DP143197.jpg/292px-Winter_Landscape%2C_Holland_MET_DP143197.jpg") no-repeat center / cover;
+  }
+  .february .calendar__picture {
+    background: #262626 url("https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Stadswal_in_de_winter_Rijksmuseum_SK-A-2112.jpeg/320px-Stadswal_in_de_winter_Rijksmuseum_SK-A-2112.jpeg") no-repeat center / cover;
+  }
+  .march .calendar__picture {
+    background: #262626 url("https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Spring_Woods_MET_ap06.1293.jpg/310px-Spring_Woods_MET_ap06.1293.jpg") no-repeat center / cover;
+  }
+  .april .calendar__picture {
+    background: #262626 url("https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Charles_Fran%C3%A7ois_Daubigny_-_The_Coming_Storm%3B_Early_Spring_-_Walters_37163.jpg/320px-Charles_Fran%C3%A7ois_Daubigny_-_The_Coming_Storm%3B_Early_Spring_-_Walters_37163.jpg") no-repeat center / cover;
+  }
+  .december .calendar__picture {
+    background: #262626 url("https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/1896_Levitan_Alpen_anagoria.JPG/256px-1896_Levitan_Alpen_anagoria.JPG") no-repeat center / cover;
+  }
+  .calendar {
+    width: 230px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 5px 2px darkgrey;
+  }
+  .calendar__picture {
+    height: 200px;
+    padding: 20px;
+    color: #fff;
+    text-shadow: 0px 0px 3px black;
+  }
+  .calendar__picture h3 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  .calendar__date {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
+  }
+  .calendar__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    font-weight: bold;
+  }
+  .calendar__number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+  }
+  .calendar__day:nth-child(7),
+  .calendar__number:nth-child(7n) {
+    color: darkred;
+  }
+  .calendar__number--current,
+  .calendar__number:hover,
+  .calendar__number--important {
+      background-color: var(--color-main);
+      color: #fff !important;
+      font-weight: bold;
+      cursor: pointer;
+  }
+  .calendar__number:hover {
+    background-color: var(--color-second);
+  }
+  .calendar__number--important {
+      background-color: var(--color-third);
+  }
+  </style>

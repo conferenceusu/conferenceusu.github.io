@@ -1,11 +1,12 @@
 ---
-
+import CalendarMonth from './CalendarMonth.astro';
+const { year, importantDates } = Astro.props;
 ---
 <script>
   'use strict';
   document.addEventListener('DOMContentLoaded', () => {
     //get date for the calendar
-    const monthClasses = ['january', 'february', 'march', 'april'];
+    const monthClasses = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
     const numberClass = 'calendar__number';
     const numberTodayClass = 'calendar__number--current';
     const today = new Date();
@@ -24,190 +25,11 @@
 </script>
 
 <div class="calendar-wrapper">
-  <div class="calendar january">
-    <div class="calendar__picture">
-      <h3>Январь 2024</h3>
-    </div>
-    <div class="calendar__date">
-      <div class="calendar__day">Пн</div>
-      <div class="calendar__day">Вт</div>
-      <div class="calendar__day">Ср</div>
-      <div class="calendar__day">Чт</div>
-      <div class="calendar__day">Пт</div>
-      <div class="calendar__day">Сб</div>
-      <div class="calendar__day">Вс</div>
-      <div class="calendar__number">1</div>
-      <div class="calendar__number">2</div>
-      <div class="calendar__number">3</div>
-      <div class="calendar__number">4</div>
-      <div class="calendar__number">5</div>
-      <div class="calendar__number">6</div>
-      <div class="calendar__number">7</div>
-      <div class="calendar__number">8</div>
-      <div class="calendar__number">9</div>
-      <div class="calendar__number">10</div>
-      <div class="calendar__number">11</div>
-      <div class="calendar__number">12</div>
-      <div class="calendar__number">13</div>
-      <div class="calendar__number">14</div>
-      <div class="calendar__number">15</div>
-      <div class="calendar__number">16</div>
-      <div class="calendar__number calendar__number--important">17</div>
-      <div class="calendar__number">18</div>
-      <div class="calendar__number">19</div>
-      <div class="calendar__number">20</div>
-      <div class="calendar__number">21</div>
-      <div class="calendar__number">22</div>
-      <div class="calendar__number">23</div>
-      <div class="calendar__number">24</div>
-      <div class="calendar__number">25</div>
-      <div class="calendar__number">26</div>
-      <div class="calendar__number">27</div>
-      <div class="calendar__number">28</div>
-      <div class="calendar__number">29</div>
-      <div class="calendar__number">30</div>
-      <div class="calendar__number">31</div>
-    </div>
-  </div>
-  <div class="calendar february">
-    <div class="calendar__picture">
-      <h3>Февраль 2024</h3>
-    </div>
-    <div class="calendar__date">
-      <div class="calendar__day">Пн</div>
-      <div class="calendar__day">Вт</div>
-      <div class="calendar__day">Ср</div>
-      <div class="calendar__day">Чт</div>
-      <div class="calendar__day">Пт</div>
-      <div class="calendar__day">Сб</div>
-      <div class="calendar__day">Вс</div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div class="calendar__number">1</div>
-      <div class="calendar__number">2</div>
-      <div class="calendar__number">3</div>
-      <div class="calendar__number">4</div>
-      <div class="calendar__number">5</div>
-      <div class="calendar__number">6</div>
-      <div class="calendar__number">7</div>
-      <div class="calendar__number">8</div>
-      <div class="calendar__number">9</div>
-      <div class="calendar__number">10</div>
-      <div class="calendar__number">11</div>
-      <div class="calendar__number">12</div>
-      <div class="calendar__number">13</div>
-      <div class="calendar__number">14</div>
-      <div class="calendar__number">15</div>
-      <div class="calendar__number">16</div>
-      <div class="calendar__number">17</div>
-      <div class="calendar__number">18</div>
-      <div class="calendar__number">19</div>
-      <div class="calendar__number">20</div>
-      <div class="calendar__number">21</div>
-      <div class="calendar__number">22</div>
-      <div class="calendar__number">23</div>
-      <div class="calendar__number">24</div>
-      <div class="calendar__number">25</div>
-      <div class="calendar__number">26</div>
-      <div class="calendar__number">27</div>
-      <div class="calendar__number">28</div>
-      <div class="calendar__number">29</div>
-    </div>
-  </div>
-  <div class="calendar march">
-    <div class="calendar__picture">
-      <h3>Март 2024</h3>
-    </div>
-    <div class="calendar__date">
-      <div class="calendar__day">Пн</div>
-      <div class="calendar__day">Вт</div>
-      <div class="calendar__day">Ср</div>
-      <div class="calendar__day">Чт</div>
-      <div class="calendar__day">Пт</div>
-      <div class="calendar__day">Сб</div>
-      <div class="calendar__day">Вс</div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div class="calendar__number">1</div>
-      <div class="calendar__number">2</div>
-      <div class="calendar__number">3</div>
-      <div class="calendar__number calendar__number--important">4</div>
-      <div class="calendar__number">5</div>
-      <div class="calendar__number">6</div>
-      <div class="calendar__number">7</div>
-      <div class="calendar__number">8</div>
-      <div class="calendar__number">9</div>
-      <div class="calendar__number">10</div>
-      <div class="calendar__number">11</div>
-      <div class="calendar__number">12</div>
-      <div class="calendar__number">13</div>
-      <div class="calendar__number">14</div>
-      <div class="calendar__number">15</div>
-      <div class="calendar__number">16</div>
-      <div class="calendar__number">17</div>
-      <div class="calendar__number">18</div>
-      <div class="calendar__number">19</div>
-      <div class="calendar__number">20</div>
-      <div class="calendar__number">21</div>
-      <div class="calendar__number">22</div>
-      <div class="calendar__number">23</div>
-      <div class="calendar__number">24</div>
-      <div class="calendar__number">25</div>
-      <div class="calendar__number">26</div>
-      <div class="calendar__number">27</div>
-      <div class="calendar__number">28</div>
-      <div class="calendar__number">29</div>
-      <div class="calendar__number">30</div>
-      <div class="calendar__number">31</div>
-    </div>
-  </div>
-  <div class="calendar april">
-    <div class="calendar__picture">
-      <h3>Апрель 2024</h3>
-    </div>
-    <div class="calendar__date">
-      <div class="calendar__day">Пн</div>
-      <div class="calendar__day">Вт</div>
-      <div class="calendar__day">Ср</div>
-      <div class="calendar__day">Чт</div>
-      <div class="calendar__day">Пт</div>
-      <div class="calendar__day">Сб</div>
-      <div class="calendar__day">Вс</div>
-      <div class="calendar__number">1</div>
-      <div class="calendar__number">2</div>
-      <div class="calendar__number calendar__number--important">3</div>
-      <div class="calendar__number">4</div>
-      <div class="calendar__number">5</div>
-      <div class="calendar__number">6</div>
-      <div class="calendar__number">7</div>
-      <div class="calendar__number">8</div>
-      <div class="calendar__number">9</div>
-      <div class="calendar__number">10</div>
-      <div class="calendar__number">11</div>
-      <div class="calendar__number">12</div>
-      <div class="calendar__number">13</div>
-      <div class="calendar__number">14</div>
-      <div class="calendar__number">15</div>
-      <div class="calendar__number">16</div>
-      <div class="calendar__number">17</div>
-      <div class="calendar__number">18</div>
-      <div class="calendar__number">19</div>
-      <div class="calendar__number">20</div>
-      <div class="calendar__number">21</div>
-      <div class="calendar__number">22</div>
-      <div class="calendar__number calendar__number--important">23</div>
-      <div class="calendar__number calendar__number--important">24</div>
-      <div class="calendar__number calendar__number--important">25</div>
-      <div class="calendar__number calendar__number--important">26</div>
-      <div class="calendar__number">27</div>
-      <div class="calendar__number">28</div>
-      <div class="calendar__number">29</div>
-      <div class="calendar__number">30</div>
-    </div>
-  </div>
+  <CalendarMonth month=12 year={year - 1} importantDates={importantDates} />
+  <CalendarMonth month=1 year={year} importantDates={importantDates} />
+  <CalendarMonth month=2 year={year} importantDates={importantDates} />
+  <CalendarMonth month=3 year={year} importantDates={importantDates} />
+  <CalendarMonth month=4 year={year} importantDates={importantDates} />
 </div>
 
 <style>
@@ -220,73 +42,7 @@
   margin-top: 1rem;
   max-width: none;
 }
-.january .calendar__picture {
-  background: #262626 url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Winter_Landscape%2C_Holland_MET_DP143197.jpg/292px-Winter_Landscape%2C_Holland_MET_DP143197.jpg") no-repeat center / cover;
-}
-.february .calendar__picture {
-  background: #262626 url("https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Stadswal_in_de_winter_Rijksmuseum_SK-A-2112.jpeg/320px-Stadswal_in_de_winter_Rijksmuseum_SK-A-2112.jpeg") no-repeat center / cover;
-}
-.march .calendar__picture {
-  background: #262626 url("https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Spring_Woods_MET_ap06.1293.jpg/310px-Spring_Woods_MET_ap06.1293.jpg") no-repeat center / cover;
-}
-.april .calendar__picture {
-  background: #262626 url("https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Charles_Fran%C3%A7ois_Daubigny_-_The_Coming_Storm%3B_Early_Spring_-_Walters_37163.jpg/320px-Charles_Fran%C3%A7ois_Daubigny_-_The_Coming_Storm%3B_Early_Spring_-_Walters_37163.jpg") no-repeat center / cover;
-}
-.calendar {
-  width: 230px;
-  background-color: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 0 5px 2px darkgrey;
-}
-.calendar__picture {
-  height: 200px;
-  padding: 20px;
-  color: #fff;
-  text-shadow: 0px 0px 3px black;
-}
-.calendar__picture h3 {
-  margin: 0;
-  font-size: 1.5rem;
-}
-.calendar__date {
-  padding: 10px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
-}
-.calendar__day {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 30px;
-  width: 30px;
-  font-weight: bold;
-}
-.calendar__number {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 30px;
-}
-.calendar__day:nth-child(7),
-.calendar__number:nth-child(7n) {
-  color: darkred;
-}
-.calendar__number--current,
-.calendar__number:hover,
-.calendar__number--important {
-    background-color: var(--color-main);
-    color: #fff !important;
-    font-weight: bold;
-    cursor: pointer;
-}
 .calendar__number--current {
   background-color: var(--color-main);
-}
-.calendar__number:hover {
-  background-color: var(--color-second);
-}
-.calendar__number--important {
-    background-color: var(--color-third);
 }
 </style>

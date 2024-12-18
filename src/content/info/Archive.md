@@ -9,6 +9,10 @@
 
 [Программа](https://github.com/conferenceusu/conferenceusu.github.io/raw/master/src/components/%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%20XXXIV.docx) (docx, 0.2 Mb)
 
+[Онлайн-программа](/prog)
+
+[Информационная страница](/2024)
+
 ### 2023 (XXXIII Российская молодежная конференция)
 
 [Сборник](https://elar.urfu.ru/bitstream/10995/124839/1/978-5-7996-3703-3_2023.pdf) (pdf, 13.4 Mb)
