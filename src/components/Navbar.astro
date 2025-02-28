@@ -4,7 +4,7 @@ const { entries={}, sticky=true, withDots=true } = Astro.props;
 <nav id="nav-bar" class={sticky && 'sticky'}>
   <a class="nav-menu-link" href="javascript:void(0);">Меню ▼</a>
   <ul class={withDots && 'with-dots'}>
-    {Object.entries(entries).map(([name, href]) => (<li><a className="nav-link" href={href}>{name}</a></li>))}
+    {Object.entries(entries).map(([name, href]) => (<li><a class="nav-link" href={href}>{name}</a></li>))}
   </ul>
 </nav>
 
