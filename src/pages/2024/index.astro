@@ -1,13 +1,13 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Calendar from '../components/Calendar2024.astro';
-import Navbar from '../components/Navbar.astro';
+import Layout from './src/layouts/Layout.astro';
+import Calendar from './src/components/Calendar2024.astro';
+import Navbar from './src/components/Navbar.astro';
 const pageTitle = "Проблемы теоретической и экспериментальной химии";
 
-import {Content as OrgCommittee} from '../content/committees/OrgCommittee2024.md';
-import {Content as ProgCommittee} from '../content/committees/ProgCommittee2024.md';
-import {Content as Sections} from '../content/info/Sections.md';
-import {Content as Archive} from '../content/info/Archive.md';
+import {Content as OrgCommittee} from './src/content/committees/OrgCommittee2024.md';
+import {Content as ProgCommittee} from './src/content/committees/ProgCommittee2024.md';
+import {Content as Sections} from './src/content/info/Sections.md';
+import {Content as Archive} from './src/content/info/Archive.md';
 ---
 
 <Layout title={pageTitle}>
@@ -38,7 +38,7 @@ import {Content as Archive} from '../content/info/Archive.md';
         <span class="material-icons">priority_high</span>
         <p>Уважаемые участники конференции! По ссылкам ниже для вас доступны программа, сборник тезисов и расписание работы XXXIV конференции (2024). Если вам нужны отдельные страницы с тезисами и ссылки на них, можно поискать их в <a href="https://elar.urfu.ru/">электронном научном архиве УрФУ</a> (<a href="http://elar.urfu.ru/handle/10995/139321">полная версия сборника</a> там тоже есть).</p>
       </div>
-      <p><a href="/prog" class="button large-button">Программа конференции</a></p>
+      <p><a href="/2024/prog" class="button large-button">Программа конференции</a></p>
       <p><a href="https://elar.urfu.ru/bitstream/10995/139321/1/978-5-7996-3916-7_2024.pdf" class="button large-button">Сборник (pdf, ~8.6 Mb)</a></p>
       <div class="info-item">
         <span class="material-icons">info</span>

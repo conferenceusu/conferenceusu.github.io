@@ -9,7 +9,7 @@
 
 [Программа](https://github.com/conferenceusu/conferenceusu.github.io/raw/master/src/components/%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%20XXXIV.docx) (docx, 0.2 Mb)
 
-[Онлайн-программа](/prog)
+[Онлайн-программа](/2024/prog)
 
 [Информационная страница](/2024)
 
