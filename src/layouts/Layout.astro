@@ -1,7 +1,7 @@
 ---
 import "normalize.css/normalize.css";
 
-const { title } = Astro.props;
+const { title, archived = false } = Astro.props;
 
 const thisPageURL = Astro.url.href;
 const feedbackURL = Astro.url.origin + '/#committee';
@@ -45,6 +45,7 @@ const feedbackURL = Astro.url.origin + '/#committee';
 </head>
 
 <body>
+  {archived && <div class="archived-notice">Архивная страница</div>}
 	<slot />
 	<footer>
 		<div  class="shariff" 
@@ -81,6 +82,18 @@ body, html {
 }
 header, main, footer {
   width: 100%;
+}
+.archived-notice {
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  text-transform: uppercase;
+  color: #8f09b594;
+  z-index: 1000;
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 2.2rem;
+  font-weight: bold;
 }
 main {
 	min-height: 100vh;

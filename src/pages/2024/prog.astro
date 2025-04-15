@@ -1,7 +1,7 @@
 ---
-import Layout from './src/layouts/Layout.astro';
-import Navbar from './src/components/Navbar.astro';
-import ConfProgram from './src/components/ConfProgram2024.jsx'
+import Layout from '/src/layouts/Layout.astro';
+import Navbar from '/src/components/Navbar.astro';
+import ConfProgram from '/src/components/ConfProgram2024.jsx';
 const pageTitle = "Программа конференции Проблемы теоретической и экспериментальной химии";
 
 import mammoth from "mammoth";
@@ -163,7 +163,7 @@ const {schedule, presentations} = parseDocxHTML(html);
 const presentationObjects = presentations.map(p => parsePresentation(p));
 ---
 
-<Layout title={pageTitle}>
+<Layout title={pageTitle} archived={true}>
 
   <Navbar entries={{
     'На главную' : '/2024',
