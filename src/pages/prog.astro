@@ -1,166 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
-import ConfProgram from '../components/ConfProgram.jsx'
+import ConfProgram from '../components/ConfProgram.jsx';
 const pageTitle = "Программа конференции Проблемы теоретической и экспериментальной химии";
-
-import mammoth from "mammoth";
-import jsdom from 'jsdom';
-const { JSDOM } = jsdom;
-
-function parseDocxHTML(html) {
-	const doc = JSDOM.fragment(html.replace(/\u00A0/g, ' '));
-  const brs = doc.querySelectorAll('br');
-	brs.forEach((br) => br.remove());
-  const all = doc.childNodes;
-  let currentSection = '';
-  let currentSubsection = '';
-  let currentSectionNumber = -1; // the section numbering starts from zero
-  let currentSubsectionNumber = 0; // the subsection numbering starts from one, it's zero if there are no subsections
-  let currentType = '';
-  let posterNumberPrefix = '';
-  const allArray = Array.from(all);
-  const scheduleStartIndex = allArray.findIndex(e => e.tagName.toLowerCase() == 'h1' && e.textContent.toLowerCase().includes("расписание"));
-  const scheduleEndIndex = allArray.findIndex(e => e.tagName.toLowerCase() == 'h1' && e.textContent.toLowerCase().includes("секция"));
-  const scheduleHTML = allArray.slice(scheduleStartIndex, scheduleEndIndex).reduce((html, e) => (html + e.outerHTML), '');
-  all.forEach(e => {
-    switch (e.tagName.toLowerCase()) {
-      case 'h1':
-        currentSection = e.textContent[0].toUpperCase() + e.textContent.substring(1).toLowerCase();
-        const prefixes = {
-          'анал' : 'А',
-          'орган' : 'О',
-          'веществ' : 'Ф',
-          'полимер' : 'В'
-        }
-        for (const key in prefixes) {
-          if (currentSection.includes(key)) {
-            posterNumberPrefix = prefixes[key];
-            currentSectionNumber += 1;
-            currentSubsectionNumber = 0;
-            currentSubsection = '';
-            break;
-          }
-        }
-        break;
-      case 'h2':
-        if (e.textContent.toLowerCase().includes('пленар')) {
-          currentType = 'пленарный';
-        } else if (e.textContent.toLowerCase().includes('устн')) {
-          currentType = 'устный';
-        } else if (e.textContent.toLowerCase().includes('стен')) {
-          currentType = 'стендовый';
-        } else if (e.textContent.toLowerCase().includes('подсекция')) {
-          currentSubsection = e.textContent;
-          currentSubsectionNumber += 1;
-        }
-        break;
-      case 'ol':
-        let number = 1;
-        const numberPrefix = currentType == 'стендовый' ? `${posterNumberPrefix}-` : '';
-        for (const li of e.querySelectorAll('li')) {
-          const numberText = `${numberPrefix}${number++}`;
-          li.setAttribute('data-number', numberText);
-          li.setAttribute('data-type', currentType);
-          li.setAttribute('data-section', currentSection + (currentSubsection.length > 0 ? `, ${currentSubsection}` : ''));
-          li.setAttribute('data-section-number', currentSectionNumber);
-          li.setAttribute('data-subsection-number', currentSubsectionNumber);
-          li.className = 'presentation';
-        }
-        break;
-      case 'p':
-        if (currentType === 'пленарный' && e.textContent.trim().length > 0) {
-          e.setAttribute('data-number', 'П');
-          e.setAttribute('data-type', currentType);
-          e.setAttribute('data-section', currentSection + (currentSubsection.length > 0 ? `, ${currentSubsection}` : ''));
-          e.setAttribute('data-section-number', currentSectionNumber);
-          e.setAttribute('data-subsection-number', currentSubsectionNumber);
-          e.className = 'presentation';
-        }
-        break;
-      default:
-        break;
-    }
-  });
-	let pCollection = doc.querySelectorAll('.presentation');
-	let pArray = Array.from(pCollection);
-	return {presentations: pArray, schedule : scheduleHTML};
-}
-
-function parsePresentation(htmlFragment) {
-  function extractContent(s) {
-    const span = JSDOM.fragment(`<span>${s}</span>`);
-    return span.textContent.replace(/\u00A0/g, ' ');
-  }
-  let authorsHTML = '';
-  let authorsText = '';
-  let titleHTML = '';
-  let affilText = '';
-  try {
-    const authorElement = htmlFragment.querySelector('strong');
-    authorsText = authorElement.textContent.match(/[^\s\.,].+[^\s,]/)[0];
-    const authorsList = authorsText.split(', ');
-    const underlinedAuthorElement = authorElement.getElementsByTagName('u')[0];
-    authorsHTML = authorsList.reduce((accum, val, index) => {
-      const prefix = index === 0 ? '' : ', ';
-      if (underlinedAuthorElement && underlinedAuthorElement.textContent === val) {
-        return accum += `${prefix}<u>${val}</u>`;
-      } else {
-        return accum += `${prefix}${val}`;
-      }
-    }, '');
-    const reTitle = new RegExp("([^\s\.,].+(?!<strong>)[^\s\.,])[\s\.,]*<strong>");
-    titleHTML = htmlFragment.innerHTML.match(reTitle)[1];
-    titleHTML = titleHTML.trim();
-    if (titleHTML[titleHTML.length - 1] == '.') {
-      titleHTML = titleHTML.substring(0, titleHTML.length - 1).trim();
-    }
-    const reAffil = new RegExp("</strong>[\s,\.]*([^\s\.,].+[^\s,\.])[\s,\.]*");
-    affilText = htmlFragment.innerHTML.match(reAffil)[1];
-  } catch (error) {
-    console.error(`Error while parsing ${htmlFragment.innerHTML}:\n${error}`);
-  }
-  let presentation = {
-    id: '',
-    number: htmlFragment.dataset.number,
-    type: htmlFragment.dataset.type,
-    sectionNumber: parseInt(htmlFragment.dataset.sectionNumber),
-    subsectionNumber: parseInt(htmlFragment.dataset.subsectionNumber),
-    authors: authorsHTML,
-    authorsText: authorsText,
-    title: titleHTML,
-    titleText: extractContent(titleHTML),
-    affil: affilText
-  };
-  // here's a catch - no subsections for the posters
-  if (presentation.type === 'стендовый') {
-    presentation.subsectionNumber = 0;
-  }
-  presentation.id = `s${presentation.sectionNumber}-ss${presentation.subsectionNumber}-no${presentation.number}`;
-  return presentation;
-}
-
-let mammothOptions = {
-    styleMap: [
-        "u => u"
-    ]
-};
-
-const html = await mammoth.convertToHtml({path: "./src/components/Программа XXXIV.docx"}, mammothOptions)
-	.then(function(result){
-		let html = result.value; // The generated HTML
-		let messages = result.messages; // Any messages, such as warnings during conversion
-		if (messages.length) {
-			console.log(messages);
-		}
-		return html;
-	})
-	.catch(function(error) {
-		console.error(error);
-	});
-
-const {schedule, presentations} = parseDocxHTML(html);
-const presentationObjects = presentations.map(p => parsePresentation(p));
+import presentationObjects from '../components/Prog2025.json';
+import Schedule from '../components/Schedule2025.html';
 ---
 
 <Layout title={pageTitle}>
@@ -172,8 +16,8 @@ const presentationObjects = presentations.map(p => parsePresentation(p));
   }} sticky={true} withDots={false}/>
 
 	<main>
-    <section id="info">Программа и расписание конференции на этой странице автоматически сгенерированы из наиболее актуального <a href="https://github.com/conferenceusu/conferenceusu.github.io/raw/master/src/components/%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%20XXXIV.docx">файла программы конференции</a>, поэтому информация в них абсолютно идентична. <a href="#presentations">Интерактивная часть</a> программы немножко экспериментальная и может не работать в совсем старых браузерах, но вы всегда сможете скачать файл. Настройки фильтра и отмеченные вами доклады сохранятся в вашем браузере, если вы не в режиме инкогнито. Желаем вам успешного участия в конференции!</section>
-    <section id="timetable" set:html={schedule}></section>
+    <section id="info"><p><strong><a href="https://urfu.ru/fileadmin/user_upload/site_32133/IENiM/chem_ruten/2025/Sbornik_2025_v.0.1.pdf" target="_blank">Первая (предварительная) версия сборника тезисов</a></strong> (pdf, 13.4 Mb).</p><p>Программа и расписание конференции на этой странице автоматически сгенерированы из актуального <a href="docs/2025/Программа XXXV.docx">файла программы конференции</a>, поэтому информация в них абсолютно идентична. <a href="#presentations">Интерактивная часть</a> программы может не работать в совсем старых браузерах, но вы всегда сможете скачать файл. Настройки фильтра и отмеченные вами доклады сохранятся в вашем браузере, если вы не в режиме инкогнито. Желаем вам успешного участия в конференции!</p></section>
+    <section id="timetable"><Schedule /></section>
     <section id="presentations">
       <h1>Доклады</h1>
       <ConfProgram client:load presentations={presentationObjects} />
@@ -196,6 +40,7 @@ const presentationObjects = presentations.map(p => parsePresentation(p));
   #timetable em {
     color: var(--color-second);
     margin-right: 0.7rem;
+    white-space: nowrap;
   }
   #timetable strong em,
   #timetable em strong {

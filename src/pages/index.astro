@@ -22,15 +22,20 @@ import {Content as Dates} from '../content/info/Dates2025.md';
 
   <Navbar entries={{'Информация' : "#info",
                     'Даты' : "#dates",
-                    'Регистрация и оргвзнос' : "#register",
+                    'Программа' : './prog',
                     'Доклады и тезисы' : "#abstracts",
+                    'Регистрация и оргвзнос' : "#register",
                     'Оргкомитет' : "#committee",
                     'Архив' : "#archive"
-  }} />
+  }} withDots={false} />
 
   <main>
     <section id="info">
       <h2>Общая информация</h2>
+      <div class="info-item">
+        <span class="material-icons">priority_high</span>
+        <p>Доступны <a href="./prog">предварительная версия программы и сборника</a> конференции.</p>
+      </div>
       <div class="info-item">
         <span class="material-icons">info</span>
         <p>Уважаемые коллеги! Приглашаем вас принять участие в XXXV Российской молодёжной научной конференции с международным участием «Проблемы теоретической и экспериментальной химии», посвященной 165-летию со дня рождения Н.С. Курнакова.</p>
@@ -44,16 +49,12 @@ import {Content as Dates} from '../content/info/Dates2025.md';
         <p>Конференция состоится <a href="#dates">22-25 апреля 2025 года</a>.</p>
       </div>
       <div class="info-item">
-        <span class="material-icons">priority_high</span>
-        <p><strong>Регистрация и прием тезисов продлены</strong> до 14 марта.</p>
-      </div>
-      <div class="info-item">
         <span class="material-icons">language</span>
         <p>Рабочими языками конференции являются русский и английский.</p>
       </div>
       <div class="info-item">
         <span class="material-icons">attach_file</span>
-        <p><a target="_blank" href="/docs/confRu-info-1-2025.pdf">Скачать первое информационное письмо</a> (pdf, &lt;0.4 Mb)</p>
+        <p><a target="_blank" href="/docs/2025/confRu-info-1-2025.pdf">Скачать первое информационное письмо</a> (pdf, &lt;0.4 Mb)</p>
       </div>
       <h3>Тематика конференции (научные секции)</h3>
       <div class="list-container centered">

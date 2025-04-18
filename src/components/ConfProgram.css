@@ -57,6 +57,11 @@ option {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0.5rem;
+  grid-template-areas: 
+    "no ti"
+    "au au"
+    "pd af"
+    "pd ch"
 }
 
 .presentation--plenary {
@@ -76,6 +81,7 @@ option {
   justify-self: center;
   font-size: 1.8em;
   padding: 0 0.2em 0;
+  grid-area: no;
 }
 
 .presentation--section-0 .presentation__number {
@@ -102,24 +108,21 @@ option {
 .presentation__title {
   overflow-wrap: anywhere;
   word-wrap: anywhere;
+  grid-area: ti;
 }
 
 .presentation__authors {
   font-style: italic;
+  grid-area: au;
 }
 
 .presentation__authors u {
   text-decoration: underline;
 }
 
-.presentation__authors,
-.presentation__affil,
-.presentation__check {
-  grid-column: 1 / -1;
-}
-
 .presentation__check {
   justify-self: end;
+  grid-area: ch;
 }
 
 .presentation__check label,
@@ -132,3 +135,26 @@ option {
   text-align: right;
   font-size: 0.9em;
 }
+
+.presentation__pdf {
+  grid-area: pd;
+  align-self: end;
+  justify-self: start;
+}
+
+.presentation__pdf img {
+  max-width: 36px;
+}
+
+.presentation__pdf a {
+  text-decoration: none;
+  border: none;
+  display: inline-block;
+  height: fit-content;
+  width: fit-content;
+}
+
+.presentation__pdf a:hover {
+  box-shadow: 2px 2px 5px 0 var(--color-main);
+}
+

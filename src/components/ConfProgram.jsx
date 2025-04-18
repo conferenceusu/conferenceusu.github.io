@@ -50,12 +50,14 @@ function PresentationCard({ presentation, checked, onCheck }) {
     }
     const presentationClass = `presentation ${presentationTypeClasses[presentation.type]} presentation--section-${presentation.sectionNumber}`;
     const checkboxID = presentation.id + '-checkbox';
+    const presentationPdfLink = <a href={`/docs/2025/abstracts/${presentation.page}.pdf`} target="_blank"><img src='/img/pdf-svgrepo-com.svg' alt="Ссылка на тезисы доклада"></img></a>;
     return (
         <div id={presentation.id} class={presentationClass}>
         <span class="presentation__number">{presentation.number}</span>
         <span class="presentation__title" dangerouslySetInnerHTML={createMarkup(presentation.title)}></span>
         <span class="presentation__authors" dangerouslySetInnerHTML={createMarkup(presentation.authors)}></span>
         <span class="presentation__affil">{presentation.affil}</span>
+        <span class="presentation__pdf">{presentation.page != 0 && presentationPdfLink}</span>
         <span class="check presentation__check">
             <label htmlFor={checkboxID}>Отметить</label>
             <input type="checkbox" 
@@ -71,12 +73,13 @@ function PresentationCard({ presentation, checked, onCheck }) {
 function FilteredProgram({ presentations, filter, checkedPresentations, onCheckPresentation }) {
     const substring = filter.text.trim();
     const isSubstring = where => (where.toLowerCase().indexOf(substring) !== -1);
+    const isSubstringOfHtml = where => (where.replace(/<[^>]*>/g, '').toLowerCase().indexOf(substring) !== -1);
     const shouldDisplay = a => (
         (!filter.checked || checkedPresentations.includes(a.id)) &&
         (filter.section === -1 || filter.section === a.sectionNumber) &&
         (filter.subsection === 0 || filter.subsection === a.subsectionNumber || a.subsectionNumber === 0) &&
         (filter.type === 'все' || filter.type === a.type) &&
-        (isSubstring(a.number) || isSubstring(a.titleText) || isSubstring(a.authorsText)));
+        (isSubstring(a.number) || isSubstringOfHtml(a.title) || isSubstringOfHtml(a.authors)));
     const elements = [];
     let lastSectionNumber = null;
     let lastSubsectionNumber = null;
