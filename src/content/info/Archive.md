@@ -3,6 +3,14 @@
 ---
 Помимо полных выпусков, также можно найти отдельные тезисы в [электронном научном архиве УрФУ](https://elar.urfu.ru/) (попробуйте поиск по авторам или названию).
 
+### 2025 (XXXV Российская молодежная конференция)
+
+[Сборник](https://insma.urfu.ru/fileadmin/user_upload/site_32133/IENiM/chem_ruten/2025/sbornik_2025_fin.pdf) (pdf, 14.3 Mb)
+
+[Программа](/docs/2025/%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%20XXXV.docx) (docx, 0.2 Mb)
+
+[Онлайн-программа](/prog)
+
 ### 2024 (XXXIV Российская молодежная конференция)
 
 [Сборник](https://elar.urfu.ru/bitstream/10995/139321/1/978-5-7996-3916-7_2024.pdf) (pdf, 8.6 Mb)
@@ -20,8 +28,6 @@
 [Программа](https://insma.urfu.ru/fileadmin/user_upload/site_32133/IENiM/chem_ruten/2023/Prog-2023.pdf) (pdf, 0.6 Mb)
 
 [Дипломы](https://insma.urfu.ru/fileadmin/user_upload/site_32133/IENiM/chem_ruten/2023/diplomas-2023.pdf) (pdf, 0.2 Mb)
-
-[Фотоархив (Yandex Диск)](https://disk.yandex.com/d/CWDhbdoyLLqSXg)
 
 ### 2022 (XXXII Российская молодежная конференция)
 
