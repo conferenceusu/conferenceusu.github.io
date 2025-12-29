@@ -1,27 +1,29 @@
 ---
 import CalendarMonth from './CalendarMonth.astro';
-const { year, importantDates } = Astro.props;
+const { year, importantDates, archived=false } = Astro.props;
 ---
-<script>
+<script define:vars={{archived}}>
   'use strict';
-  document.addEventListener('DOMContentLoaded', () => {
-    //get date for the calendar
-    const monthClasses = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
-    const numberClass = 'calendar__number';
-    const numberTodayClass = 'calendar__number--current';
-    const today = new Date();
-    const mm = today.getMonth();
-    const dd = today.getDate();
-    const dateSelector = `.${monthClasses[mm]} .${numberClass}`;
-    //console.log(dateSelector);
-    const monthNodes = document.querySelectorAll(dateSelector);
-    if (monthNodes) {
-      const monthNode = monthNodes[dd - 1];
-      if (monthNode) {
-        monthNode.classList.add(numberTodayClass);
+  if (!archived) {
+    document.addEventListener('DOMContentLoaded', () => {
+      //get date for the calendar
+      const monthClasses = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+      const numberClass = 'calendar__number';
+      const numberTodayClass = 'calendar__number--current';
+      const today = new Date();
+      const mm = today.getMonth();
+      const dd = today.getDate();
+      const dateSelector = `.${monthClasses[mm]} .${numberClass}`;
+      //console.log(dateSelector);
+      const monthNodes = document.querySelectorAll(dateSelector);
+      if (monthNodes) {
+        const monthNode = monthNodes[dd - 1];
+        if (monthNode) {
+          monthNode.classList.add(numberTodayClass);
+        }
       }
-    }
-  }, {once: true});
+    }, {once: true});
+  }
 </script>
 
 <div class="calendar-wrapper">

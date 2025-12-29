@@ -1,31 +1,32 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Calendar from '../components/Calendar.astro';
-import Navbar from '../components/Navbar.astro';
+import Layout from '/src/layouts/Layout.astro';
+import Calendar from '/src/components/Calendar.astro';
+import Navbar from '/src/components/Navbar.astro';
 const pageTitle = "Проблемы теоретической и экспериментальной химии";
 
-import {Content as OrgCommittee} from '../content/committees/OrgCommittee2026.md';
-import {Content as ProgCommittee} from '../content/committees/ProgCommittee2026.md';
-import {Content as Sections} from '../content/info/Sections.md';
-import {Content as Archive} from '../content/info/Archive.md';
-import {Content as Dates} from '../content/info/Dates2026.md';
+import {Content as OrgCommittee} from '/src/content/committees/OrgCommittee2025.md';
+import {Content as ProgCommittee} from '/src/content/committees/ProgCommittee2025.md';
+import {Content as Sections} from '/src/content/info/Sections.md';
+import {Content as Archive} from '/src/content/info/Archive.md';
+import {Content as Dates} from '/src/content/info/Dates2025.md';
 
-const archived = false;
+const archived = true;
 ---
 
 <Layout title={pageTitle} archived={archived}>
   <header>
     <div class="logo-wrap">
       <img class="header-img insma-logo" height="128" width="300" alt="insma-logo" src="/img/insmalogo.png">
-      <img class="header-img conf-logo" height="128" width="128" alt="conf-logo" src="/img/conflogo2026.svg">
+      <img class="header-img conf-logo" height="128" width="128" alt="conf-logo" src="/img/conflogo2025.png">
     </div>
-    <h1>XXXVI Российская молодёжная научная конференция с международным участием «Проблемы теоретической и экспериментальной химии»</h1>
+    <h1>XXXV Российская молодёжная научная конференция с международным участием «Проблемы теоретической и экспериментальной химии»</h1>
   </header>
 
   <Navbar entries={{'Информация' : "#info",
                     'Даты' : "#dates",
-                    'Регистрация и оргвзнос' : "#register",
+                    'Программа' : './prog',
                     'Доклады и тезисы' : "#abstracts",
+                    'Регистрация и оргвзнос' : "#register",
                     'Оргкомитет' : "#committee",
                     'Архив' : "#archive"
   }} withDots={false} />
@@ -34,8 +35,16 @@ const archived = false;
     <section id="info">
       <h2>Общая информация</h2>
       <div class="info-item">
+        <span class="material-icons">bookmark</span>
+        <p>Это архивная страница, посвященная одной из прошедших конференций. Информация о будущей конференции доступна <a href='/'>на главной странице</a>.</p>
+      </div>
+      <div class="info-item">
+        <span class="material-icons">volunteer_activism</span>
+        <p>XXXV Российская молодёжная научная конференция с международным участием «Проблемы теоретической и экспериментальной химии» была проведена в рамках проекта «Развитие компетенций в области аналитического мониторинга и управления биотехнологическими процессами», поддержаного федеральным проектом «Опережающая подготовка и переподготовка квалифицированных кадров по направлению новых материалов и химии» национального проекта технологического лидерства «Новые материалы и химия».</p>
+      </div>
+      <div class="info-item">
         <span class="material-icons">info</span>
-        <p>Уважаемые коллеги! Приглашаем вас принять участие в XXXVI Российской молодёжной научной конференции с международным участием «Проблемы теоретической и экспериментальной химии», посвященной 120-летию со дня рождения С.В. Карпачёва.</p>
+        <p>Уважаемые коллеги! Благодарим вас за участие в XXXV Российской молодёжной научной конференции с международным участием «Проблемы теоретической и экспериментальной химии», посвященной 165-летию со дня рождения Н.С. Курнакова.</p>
       </div>
       <div class="info-item">
         <span class="material-icons">place</span>
@@ -43,7 +52,7 @@ const archived = false;
       </div>
       <div class="info-item">
         <span class="material-icons">event</span>
-        <p>XXXVI Конференция состоится <a href="#dates">21–24 апреля 2026 года</a>.</p>
+        <p>XXXV Конференция состоялась <a href="#dates">22-25 апреля 2025 года</a>.</p>
       </div>
       <div class="info-item">
         <span class="material-icons">language</span>
@@ -51,7 +60,7 @@ const archived = false;
       </div>
       <div class="info-item">
         <span class="material-icons">attach_file</span>
-        <p><a target="_blank" href="/docs/2026/confRu-info-1-2026.pdf">Скачать первое информационное письмо</a> (pdf, &lt;0.6 Mb)</p>
+        <p><a target="_blank" href="/docs/2025/confRu-info-1-2025.pdf">Скачать первое информационное письмо</a> (pdf, &lt;0.4 Mb)</p>
       </div>
       <h3>Тематика конференции (научные секции)</h3>
       <div class="list-container centered">
@@ -64,51 +73,36 @@ const archived = false;
       <div class="list-container centered">
         <Dates />
       </div>
-      <Calendar year="2026" archived={archived} importantDates="25.12.25 1.3 6.4 21.4 22.4 23.4 24.4" />
+      <Calendar year="2025" archived={archived} importantDates="25.12.24 14.3 15.4 22.4 23.4 24.4 25.4" />
     </section>
 
 
     <section id="register">
       <h2>Регистрация и оплата оргвзноса</h2>
-      <div class="info-item">
-        <span class="material-icons">priority_high</span>
-        <p><strong>Формат проведения конференции</strong> предусматривает очное участие (с устным или стендовым докладом) и заочное участие (только публикация тезисов доклада). Дистанционный (онлайн) формат участия не предполагается.</p>
-      </div>
       <p>Для участия в работе конференции необходимо:</p>
-      <div class="info-item info-item__border">
+      <div class="info-item">
         <span class="material-icons">login</span>
-        <div>
-          <p>Заранее (<a href="#dates">см. даты</a>) зарегистрироваться по следующей ссылке <a href="https://scievent.urfu.ru/conferenceusuRu2026" target="_blank">на портале научных мероприятий УрФУ</a>. Можете также ознакомиться с инструкциями по <a href="https://scievent.urfu.ru/docs/%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D1%8F.%20%D0%9F%D0%BE%D1%80%D1%82%D0%B0%D0%BB%20%D0%BD%D0%B0%D1%83%D1%87%D0%BD%D1%8B%D1%85%20%D0%BC%D0%B5%D1%80%D0%BE%D0%BF%D1%80%D0%B8%D1%8F%D1%82%D0%B8%D0%B9.%20%D0%A0%D0%B5%D0%B3%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B8%20%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F.pdf" target="_blank">регистрации</a> и <a href="https://scievent.urfu.ru/docs/%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D1%8F.%20%D0%9F%D0%BE%D1%80%D1%82%D0%B0%D0%BB%20%D0%BD%D0%B0%D1%83%D1%87%D0%BD%D1%8B%D1%85%20%D0%BC%D0%B5%D1%80%D0%BE%D0%BF%D1%80%D0%B8%D1%8F%D1%82%D0%B8%D0%B9.%20%D0%9F%D0%BE%D0%B4%D0%B0%D1%87%D0%B0%20%D0%B7%D0%B0%D1%8F%D0%B2%D0%BA%D0%B8%20%D0%BD%D0%B0%20%D1%83%D1%87%D0%B0%D1%81%D1%82%D0%B8%D0%B5%20%D0%B2%20%D0%BC%D0%B5%D1%80%D0%BE%D0%BF%D1%80%D0%B8%D1%8F%D1%82%D0%B8%D0%B8.pdf" target="_blank">подаче заявки на участие</a> в конференции.</p>
-          <p>Пожалуйста, обратите внимание, что на <strong>один доклад</strong> регистрируется только <strong>один человек</strong> - докладчик. Если с одним докладом на стендовой сессии хотят выступить несколько соавторов работы, либо у докладчика есть соавторы или иные сопровождающие лица, не трудоустроенные и не обучающиеся в УрФУ, но желающие попасть на конференцию, <a href="#committee">напишите об этом в оргкомитет</a> по электронной почте. Регистрироваться на Портале каждому соавтору не требуется.</p>
-          <p>При регистрации не забывайте, пожалуйста, <strong>указывать секцию</strong>, на которой ваш доклад будет представлен.</p>
-        </div>
+        <p>Заранее (<a href="#dates">см. даты</a>) зарегистрироваться по следующей ссылке <a href="https://scievent.urfu.ru/conferenceusuRu2025" target="_blank">на портале научных мероприятий УрФУ</a>. Можете также ознакомиться с инструкциями по <a href="https://scievent.urfu.ru/docs/%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D1%8F.%20%D0%9F%D0%BE%D1%80%D1%82%D0%B0%D0%BB%20%D0%BD%D0%B0%D1%83%D1%87%D0%BD%D1%8B%D1%85%20%D0%BC%D0%B5%D1%80%D0%BE%D0%BF%D1%80%D0%B8%D1%8F%D1%82%D0%B8%D0%B9.%20%D0%A0%D0%B5%D0%B3%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B8%20%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F.pdf" target="_blank">регистрации</a> и <a href="https://scievent.urfu.ru/docs/%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D1%8F.%20%D0%9F%D0%BE%D1%80%D1%82%D0%B0%D0%BB%20%D0%BD%D0%B0%D1%83%D1%87%D0%BD%D1%8B%D1%85%20%D0%BC%D0%B5%D1%80%D0%BE%D0%BF%D1%80%D0%B8%D1%8F%D1%82%D0%B8%D0%B9.%20%D0%9F%D0%BE%D0%B4%D0%B0%D1%87%D0%B0%20%D0%B7%D0%B0%D1%8F%D0%B2%D0%BA%D0%B8%20%D0%BD%D0%B0%20%D1%83%D1%87%D0%B0%D1%81%D1%82%D0%B8%D0%B5%20%D0%B2%20%D0%BC%D0%B5%D1%80%D0%BE%D0%BF%D1%80%D0%B8%D1%8F%D1%82%D0%B8%D0%B8.pdf" target="_blank">подаче заявки на участие</a> в конференции.</p>
       </div>
-      <div class="info-item info-item__border">
+      <div class="info-item">
         <span class="material-icons">email</span>
-        <div>
-          <p>Оформить тезисы докладов в соответствии с <a href="#abstracts">установленной формой</a> и прикрепить файл тезисов <a href="https://scievent.urfu.ru/conferenceusuRu2026" target="_blank">на портале научных мероприятий УрФУ</a>. Это можно сделать как во время регистрации участника, так и после отправки регистрационной формы.</p>
-          <p>Решение о принятии доклада и тезисов доклада к представлению на конференции будет принято после начала работы программного комитета. Программный комитет начинает свою работу после окончания приема тезисов докладов (<a href="#dates">см. даты</a>).</p>
-        </div>
-
+        <p>Оформить тезисы докладов в соответствии с <a href="#abstracts">установленной формой</a> и прикрепить файл тезисов <a href="https://scievent.urfu.ru/conferenceusuRu2025" target="_blank">на портале научных мероприятий УрФУ</a>. Это можно сделать как во время регистрации участника, так и после отправки регистрационной формы.
+        </p>
       </div>
-      <div class="info-item info-item__border">
+      <div class="info-item">
         <span class="material-icons">payment</span>
-        <div>
-          <p>После включения докладов в программу конференции необходимо оплатить организационный взнос в зависимости от типа участия. Тезисы докладов участников, не оплативших оргвзнос, публиковаться не будут. Сотрудники, аспиранты и студенты Уральского федерального университета освобождены от уплаты оргвзноса.</p>
-          <p>Стоимость оргвзноса приведена ниже. Подробная информация о порядке оплаты оргвзноса будет предоставлена зарегистрированным пользователям после экспертизы тезисов.</p>
-          <p>Один участник конференции может выступить не более чем с двумя докладами. Организационный взнос оплачивается за каждый доклад отдельно.</p>
-        </div>
+        <p>После включения докладов в программу конференции необходимо оплатить организационный взнос в зависимости от типа участия. Тезисы докладов участников, не оплативших оргвзнос, публиковаться не будут. Сотрудники, аспиранты и студенты Уральского федерального университета освобождены от уплаты оргвзноса. <br /> Стоимость оргвзноса приведена ниже. Подробная информация о порядке оплаты оргвзноса будет предоставлена зарегистрированным пользователям.</p>
       </div>
       <div class="fees-container">
         <div class="fees-card">
           <h3>Доклад</h3>
-          <div class="fee">1500 ₽</div>
+          <div class="fee">1200 ₽</div>
           <span class="material-icons">shopping_cart</span>
           <p>Очные (устные или стендовые) доклады</p>
         </div>
         <div class="fees-card">
           <h3>Заочно</h3>
-          <div class="fee">1000 ₽</div>
+          <div class="fee">800 ₽</div>
           <span class="material-icons">savings</span>
           <p>Заочное участие</p>
         </div>
@@ -131,7 +125,7 @@ const archived = false;
       <h3>Оформление докладов</h3>
       <p><strong>Устные доклады:</strong> длительность доклада — 10 минут; презентация в формате Microsoft PowerPoint (.pptx) или Portable Document Format (.pdf).</p>
       <p><strong>Стендовые доклады:</strong> формат стенда — A1 (размер листа A1 — 594 х 841 мм), вертикальная ориентация.</p>
-      <p>При оформлении докладов можно использовать логотипы конференции: круглый (<a href="/img/conflogo2026.svg">svg</a> или <a href="/img/conflogo2026.png">png</a>) и квадратный (<a href="/img/conflogo2026_mini.svg">svg</a> или <a href="/img/conflogo2026_mini.png">png</a>).</p>
+      <p>При оформлении докладов можно использовать логотип конференции (<a href="/img/conflogo2025large.svg">svg</a> или <a href="/img/conflogo2025large.png">png</a>).</p>
     </section>
 
 
@@ -147,13 +141,13 @@ const archived = false;
           <h4>Председатель</h4>
           <img width="250" height="275" alt="Председатель" src="/img/chairman.jpg">
           <p><strong>Черепанов Владимир Александрович</strong></p>
-          <p>д.х.н., профессор кафедры физической и неорганической химии ИЕНиМ УрФУ</p>
+          <p>д.х.н., профессор,заведующий кафедрой физической и неорганической химии ИЕНиМ УрФУ</p>
         </div>
         <div class="committee-card">
           <h4>Отв. секретарь</h4>
           <img width="256" height="275" alt="Секретарь" src="/img/secretary2025.jpg">
           <p><strong>Мазурин Максим Олегович</strong></p>
-          <p>к.х.н., доцент департамента фундаментальной и прикладной химии ИЕНиМ УрФУ</p>
+          <p>к.х.н., ассистент департамента фундаментальной и прикладной химии ИЕНиМ УрФУ</p>
         </div>
       </div>
       <h3>Члены оргкомитета</h3>
@@ -224,21 +218,7 @@ header {
   margin: 0 auto;
 }
 .info-item > :nth-child(2) {
-  margin-left: 0.7rem;
-}
-.info-item > :nth-child(2) {
-  padding-left: 0.3rem;
-}
-.info-item__border > :nth-child(2) {
-  border-left: 1px solid var(--color-third);
-  border-radius: 0.5rem;
-  margin-bottom: 1rem;
-}
-.info-item__border > :nth-child(2) p:first-of-type {
-  margin-top: 0;
-}
-.info-item__border > :nth-child(2) p:last-of-type {
-  margin-bottom: 0;
+  margin-left: 1rem;
 }
 .committee-wrapper {
   display: flex;
@@ -280,7 +260,6 @@ header {
   flex-wrap: wrap;
   gap: 2rem;
   margin-bottom: 2rem;
-  margin-top: 1rem;
 }
 .fees-card {
   flex-basis: 200px;

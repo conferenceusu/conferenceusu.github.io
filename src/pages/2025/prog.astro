@@ -1,16 +1,16 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
-import ConfProgram from '../components/ConfProgram.jsx';
+import Layout from '/src/layouts/Layout.astro';
+import Navbar from '/src/components/Navbar.astro';
+import ConfProgram from '/src/components/ConfProgram.jsx';
 const pageTitle = "Программа конференции Проблемы теоретической и экспериментальной химии";
-import presentationObjects from '../components/Prog2025.json';
-import Schedule from '../components/Schedule2025.html';
+import presentationObjects from '/src/components/Prog2025.json';
+import Schedule from '/src/components/Schedule2025.html';
 ---
 
 <Layout title={pageTitle} archived={true}>
 
   <Navbar entries={{
-    'На главную' : Astro.url.origin,
+    'На главную' : '/2025',
     'Расписание' : '#timetable',
     'Доклады' : '#presentations'
   }} sticky={true} withDots={false}/>

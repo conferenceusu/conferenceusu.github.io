@@ -54,8 +54,8 @@ const feedbackURL = Astro.url.origin + '/#committee';
 					data-url={thisPageURL} 
 					data-services="[&quot;telegram&quot;,&quot;whatsapp&quot;,&quot;vk&quot;]"></div>
 		<ul>
-			<li><a href={feedbackURL}>Обратная связь</a></li>
-			<li><a href="#">Наверх</a></li>
+			<li><a class="footer-link" href={feedbackURL}>Обратная связь</a></li>
+			<li><a class="footer-link" href="#">Наверх</a></li>
 		</ul>
 	</footer>
 </body>
@@ -86,11 +86,12 @@ header, main, footer {
 .archived-notice {
   position: fixed;
   bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
   text-align: center;
   text-transform: uppercase;
   color: #8f09b594;
   z-index: 1000;
-  width: 100%;
   margin-bottom: 10px;
   font-size: 2.2rem;
   font-weight: bold;
@@ -221,8 +222,10 @@ footer li {
   display: inline;
   margin-left: 0.5em;
 }
-footer a:hover {
+footer a:hover,
+.footer-link:hover {
   border: none;
+  color: var(--color-main);
 }
 footer a,
 footer a:visited {
