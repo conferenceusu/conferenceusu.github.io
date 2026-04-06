@@ -5,5 +5,9 @@ import preact from "@astrojs/preact";
 // https://astro.build/config
 export default defineConfig({
   site: 'https://conferenceusu.github.io',
-  integrations: [preact()]
+  integrations: [preact()],
+  redirects: {
+    "/2026/prog": "/prog",
+    "/2026": "/",
+  }
 });
