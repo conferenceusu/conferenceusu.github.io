@@ -1,14 +1,28 @@
-import { useState, useEffect } from 'preact/hooks';
+import { useState, useEffect, useMemo, useRef } from 'preact/hooks';
 import "./ConfProgram.css";
 
 const sectionNames = [
+    'Доклады в день открытия конференции',
+    'Секция физикохимии полимерных и коллоидных систем',
     'Секция аналитической химии и химии окружающей среды',
-    'Секция органической химии',
     'Секция физической химии веществ и материалов',
-    'Секция физикохимии полимерных и коллоидных систем'
+    'Секция органической химии',
 ];
 
-const sectionsHaveSubsections = [2];
+const sectionLetters = ['П', 'Ф', 'А', 'Т', 'О'];
+
+const subsectionNames = [
+    'Подсекция 1',
+    'Подсекция 2',
+];
+
+const sectionsHaveSubsections = [3];
+
+const conferenceYear = 2026;
+const localStorageFilterName = `filter-${conferenceYear}`;
+const localStorageCheckedName = `checked-${conferenceYear}`;
+
+const backendProgramEndpoint = 'https://api.064329.xyz/prog/'; //'http://127.0.0.1:8000/prog/'; // 
 
 function createMarkup(html) {
     return {__html: html};
@@ -42,22 +56,69 @@ function storageAvailable(type) {
     }
 }
 
+const timeFormatter = new Intl.DateTimeFormat('en-GB', {
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: false,
+  timeZone: 'Asia/Yekaterinburg'
+});
+
 function PresentationCard({ presentation, checked, onCheck }) {
-    const presentationTypeClasses = {
-        'пленарный' : 'presentation--plenary',
-        'устный' : 'presentation--oral',
-        'стендовый' : 'presentation--poster'
-    }
-    const presentationClass = `presentation ${presentationTypeClasses[presentation.type]} presentation--section-${presentation.sectionNumber}`;
+    const presentationClass = `presentation presentation--${presentation.type} presentation--section-${presentation.section}`;
     const checkboxID = presentation.id + '-checkbox';
-    const presentationPdfLink = <a href={`/docs/2025/abstracts/${presentation.page}.pdf`} target="_blank"><img src='/img/pdf-svgrepo-com.svg' alt="Ссылка на тезисы доклада"></img></a>;
+    const presentationLink = <a href={`/docs/2026/abstracts/${presentation.page.toString().padStart(3, '0')}.html`} target="_blank"><img src='/img/article_shortcut.svg' alt="Ссылка на тезисы доклада"></img></a>;
+    let presentationNumberText = null;
+    switch(presentation.type) {
+        case 'plenary':
+            presentationNumberText = 'П';
+            if (presentation.section === 0) {
+                presentationNumberText += `-${presentation.number}`
+            }
+            break;
+        case 'oral':
+            presentationNumberText = presentation.number.toString();
+            break;
+        case 'poster':
+            presentationNumberText = `${sectionLetters[presentation.section]}-${presentation.number}`;
+            break;
+        case 'extra':
+            presentationNumberText = `${sectionLetters[presentation.section]}з-${presentation.number}`;
+            break;
+        default:
+            break;
+    }
+    let presentationStatusText = null;
+    const times = [presentation.time_started,
+                    presentation.time_finished
+        ].map(dateText => dateText ? timeFormatter.format(new Date(dateText)) : null).filter(Boolean);
+    const timesText = times.length ? ` (${times.join(' - ')})` : '';
+    if (presentation.type === 'plenary' || presentation.type === 'oral') {
+        switch(presentation.status) {
+            case 'current':
+                presentationStatusText = <><span class="hourglass">⏳</span><span> Докладывается...{timesText}</span></>;
+                break;
+            case 'delivered':
+                presentationStatusText = `✅ Доклад состоялся${timesText}`;
+                break;
+            case 'cancelled':
+                presentationStatusText = '❌ Доклад отменен';
+                break;
+            case undefined:
+                break;
+            case 'scheduled':
+                //break;
+            default:
+                presentationStatusText = '📅 Доклад запланирован';
+                break;
+        }
+    }
     return (
         <div id={presentation.id} class={presentationClass}>
-        <span class="presentation__number">{presentation.number}</span>
+        <span class="presentation__number">{presentationNumberText}</span>
         <span class="presentation__title" dangerouslySetInnerHTML={createMarkup(presentation.title)}></span>
-        <span class="presentation__authors" dangerouslySetInnerHTML={createMarkup(presentation.authors)}></span>
-        <span class="presentation__affil">{presentation.affil}</span>
-        <span class="presentation__pdf">{presentation.page != 0 && presentationPdfLink}</span>
+        <span class="presentation__authors">{presentation.authors}</span>
+        <span class="presentation__affs">{presentation.affs}</span>
+        <span class="presentation__html">{presentationLink}</span>
         <span class="check presentation__check">
             <label htmlFor={checkboxID}>Отметить</label>
             <input type="checkbox" 
@@ -66,6 +127,7 @@ function PresentationCard({ presentation, checked, onCheck }) {
                    checked={checked} 
                    onChange={c => onCheck(c.target.checked, presentation.id)} />
         </span>
+        {presentationStatusText && <span class="presentation__status">{presentationStatusText}</span>}
         </div>
     );
 }
@@ -76,37 +138,49 @@ function FilteredProgram({ presentations, filter, checkedPresentations, onCheckP
     const isSubstringOfHtml = where => (where.replace(/<[^>]*>/g, '').toLowerCase().indexOf(substring) !== -1);
     const shouldDisplay = a => (
         (!filter.checked || checkedPresentations.includes(a.id)) &&
-        (filter.section === -1 || filter.section === a.sectionNumber) &&
-        (filter.subsection === 0 || filter.subsection === a.subsectionNumber || a.subsectionNumber === 0) &&
+        (filter.section === -1 || filter.section === a.section) &&
+        (
+            filter.subsection === -1 || 
+            (sectionsHaveSubsections.includes(filter.section) && filter.type === 'poster') || 
+            filter.subsection === a.subsection
+        ) &&
         (filter.type === 'все' || filter.type === a.type) &&
-        (isSubstring(a.number) || isSubstringOfHtml(a.title) || isSubstringOfHtml(a.authors)));
-    const elements = [];
-    let lastSectionNumber = null;
-    let lastSubsectionNumber = null;
-    presentations.forEach(a => {
-        if (shouldDisplay(a)) {
-            if (a.sectionNumber !== lastSectionNumber) {
-                elements.push(<h2 className="section-name">{sectionNames[a.sectionNumber]}</h2>);
-            }
-            if (a.subsectionNumber > 0 && a.subsectionNumber !== lastSubsectionNumber) {
-                elements.push(<h3 className="subsection-name">{`Подсекция ${a.subsectionNumber}`}</h3>);
-            }
-            elements.push(<PresentationCard key={a.id} 
-                                            presentation={a} 
-                                            checked={checkedPresentations.includes(a.id)} 
-                                            onCheck={onCheckPresentation} />);
-            lastSectionNumber = a.sectionNumber;
-            lastSubsectionNumber = a.subsectionNumber;
+        (isSubstringOfHtml(a.title) || isSubstring(a.authors))
+    ); // a hack - posters are not divided by subsections!
+    const filteredPresentations = useMemo(() => {
+        //console.log('memo');
+        return presentations.filter(shouldDisplay);
+    }, [presentations, filter]);
+    let lastSection = null;
+    let lastSubsection = null;
+    return filteredPresentations.map(a => {
+        let sectionHeader = null;
+        let subsectionHeader = null;
+        if (a.section !== lastSection) {
+            sectionHeader = <h2 className="section-name">{sectionNames[a.section]}</h2>;
+            lastSection = a.section;
         }
+        if (a.subsection !== undefined && a.subsection !== lastSubsection) {
+            subsectionHeader = <h3 className="subsection-name">{subsectionNames[a.subsection]}</h3>;
+            lastSubsection = a.subsection;
+        }
+        return <>
+            {sectionHeader}
+            {subsectionHeader}
+            <PresentationCard key={a.id} 
+                              presentation={a} 
+                              checked={checkedPresentations.includes(a.id)} 
+                              onCheck={onCheckPresentation} />
+        </>;
     });
-    return <>{elements}</>;
 }
 
-export default function ConfProgram({ presentations }) {
+export default function ConfProgram({ staticProgram }) {
+    const [presentations, setPresentations] = useState(staticProgram);
     const defaultFilter = {
         text: "",
         section: -1,
-        subsection: 0,
+        subsection: -1,
         type: "все",
         checked: false
     };
@@ -115,23 +189,66 @@ export default function ConfProgram({ presentations }) {
     useEffect(()=>{
         //"run this only once" hack
         if (storageAvailable("localStorage")) {
-            const storedFilterText = localStorage.getItem('filter');
+            const storedFilterText = localStorage.getItem(localStorageFilterName);
             if (storedFilterText) {
                 handleFilter({
                     ...defaultFilter,
                     ...JSON.parse(storedFilterText)
                 });
             }
-            const storedCheckedOnes = localStorage.getItem('checked');
+            const storedCheckedOnes = localStorage.getItem(localStorageCheckedName);
             if (storedCheckedOnes) {
-                //todo: add cleanup for nonexistent presentation IDs in localStorage
                 setCheckedPresentations(JSON.parse(storedCheckedOnes));
             }
         }
     }, []);
+    const [isLive, setIsLive] = useState(false);
+    const lastEtag = useRef(null);
+    useEffect(() => {
+        async function fetchLiveStatuses() {
+            let success = false;
+            try {
+                const response = await fetch(backendProgramEndpoint);
+                if (!response.ok) throw new Error("Server unreachable");
+                const etag = response.headers.get('ETag');
+                if (etag && etag !== lastEtag.current) {
+                    //console.log('fetched new');
+                    const liveStatuses = await response.json();
+                    const updatedPresentations = presentations.map(presentation => {
+                        if (liveStatuses[presentation.id]) {
+                            return { ...presentation, ...liveStatuses[presentation.id] };
+                        } else {
+                            return { ...presentation, status: 'scheduled' };
+                        }
+                    });
+                    setPresentations(updatedPresentations);
+                    lastEtag.current = etag;
+                } /*else {
+                    console.log(`${etag} fetched old`);
+                }*/
+                setIsLive(true);
+                success = true;
+            } catch (e) {
+                console.warn("Could not fetch live updates");
+                console.warn(e);
+                setIsLive(false); 
+            } finally {
+                return success;
+            }
+        }
+
+        const interval = (async () => {
+            const firstFetchResult = await fetchLiveStatuses();
+            return firstFetchResult ? setInterval(fetchLiveStatuses, 20000) : null;
+        })();
+       
+        return () => {
+            if (interval) clearInterval(interval);
+        };
+    }, []);
     function handleFilter(newFilter) {
         if (storageAvailable("localStorage")) {
-            localStorage.setItem("filter", JSON.stringify(newFilter));
+            localStorage.setItem(localStorageFilterName, JSON.stringify(newFilter));
         }
         setFilter(newFilter);
     }
@@ -143,7 +260,7 @@ export default function ConfProgram({ presentations }) {
     }
     function handleFilterSection(val) {
         const newSection = parseInt(val);
-        const newSubsection = sectionsHaveSubsections.includes(newSection) ? filter.subsection : 0;
+        const newSubsection = sectionsHaveSubsections.includes(newSection) ? filter.subsection : -1;
         handleFilter({
             ...filter,
             section : newSection,
@@ -180,7 +297,7 @@ export default function ConfProgram({ presentations }) {
         }
         setCheckedPresentations(newCheckedPresentations);
         if (storageAvailable("localStorage")) {
-            localStorage.setItem("checked", JSON.stringify(newCheckedPresentations));
+            localStorage.setItem(localStorageCheckedName, JSON.stringify(newCheckedPresentations));
         }
     }
     return (
@@ -188,11 +305,11 @@ export default function ConfProgram({ presentations }) {
             <div class="filter-wrapper">
                 <input class="filter-input"
                        type="text"
-                       placeholder="фильтр (№, авторы или название)"
+                       placeholder="фильтр (авторы или название)"
                        value={filter.text}
                        onInput={e => handleFilterText(e.target.value)}
                        onKeyUp={e => {
-                         if (e.code === 'Enter' || e.keyCode === 13) {
+                         if (e.code === 'Enter') {
                            e.target.blur();
                          }
                        }}
@@ -209,9 +326,8 @@ export default function ConfProgram({ presentations }) {
                             name="subsection"
                             value={filter.subsection}
                             onChange={e => handleFilterSubsection(e.target.value)} >
-                        <option value="0">Все подсекции</option>
-                        <option value="1">Подсекция 1</option>
-                        <option value="2">Подсекция 2</option>
+                        <option value="-1">Все подсекции</option>
+                        {subsectionNames.map((s, i) => <option value={i.toString()}>{s}</option>)}
                     </select>
                 }
                 <select class="filter-select"
@@ -219,9 +335,10 @@ export default function ConfProgram({ presentations }) {
                         value={filter.type}
                         onChange={e => handleFilterType(e.target.value)} >
                     <option value="все">Все доклады</option>
-                    <option value="пленарный">Пленарные</option>
-                    <option value="устный">Устные</option>
-                    <option value="стендовый">Стендовые</option>
+                    <option value="plenary">Пленарные</option>
+                    <option value="oral">Устные</option>
+                    <option value="poster">Стендовые</option>
+                    <option value="extra">Заочные</option>
                 </select>
                 <span class="check filter-check">
                     <label for="filter-check">Отображать только отмеченные</label>

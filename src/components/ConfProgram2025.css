@@ -1,8 +1,8 @@
 :root {
-  --color-section-1: #efd13f;
-  --color-section-2: #26a16f;
-  --color-section-3: #2bb0cf;
-  --color-section-4: #ea6c6b;
+  --color-section-0: #efd13f;
+  --color-section-1: #26a16f;
+  --color-section-2: #2bb0cf;
+  --color-section-3: #ea6c6b;
 }
 
 .section-name {
@@ -73,10 +73,6 @@ option {
 }
 
 .presentation--poster {
-  border: 3px dashed darkgray;
-}
-
-.presentation--extra {
   border: 3px dotted darkgray;
 }
 
@@ -86,6 +82,10 @@ option {
   font-size: 1.8em;
   padding: 0 0.2em 0;
   grid-area: no;
+}
+
+.presentation--section-0 .presentation__number {
+  box-shadow: inset 0 -0.5em 0 0 var(--color-section-0);
 }
 
 .presentation--section-1 .presentation__number {
@@ -98,10 +98,6 @@ option {
 
 .presentation--section-3 .presentation__number {
   box-shadow: inset 0 -0.5em 0 0 var(--color-section-3);
-}
-
-.presentation--section-4 .presentation__number {
-  box-shadow: inset 0 -0.5em 0 0 var(--color-section-4);
 }
 
 .presentation__number,
@@ -129,72 +125,36 @@ option {
   grid-area: ch;
 }
 
-.presentation__status {
-  grid-column: 1 / -1;
-}
-
 .presentation__check label,
 .filter-check label {
   user-select: none;
 }
 
-.presentation__affs {
+.presentation__affil {
   justify-self: end;
   text-align: right;
   font-size: 0.9em;
 }
 
-.presentation__html {
+.presentation__pdf {
   grid-area: pd;
   align-self: end;
   justify-self: start;
 }
 
-.presentation__html img {
-  width: 48px;
+.presentation__pdf img {
+  max-width: 36px;
 }
 
-.presentation__html a {
+.presentation__pdf a {
   text-decoration: none;
   border: none;
-  border-radius: 3px;
   display: inline-block;
   height: fit-content;
   width: fit-content;
 }
 
-.presentation__html a:hover {
-  box-shadow: 0 0 7px 1px var(--color-main);
+.presentation__pdf a:hover {
+  box-shadow: 2px 2px 5px 0 var(--color-main);
 }
 
-.led {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  box-shadow: 0 0 10px #28a745;
-  animation: pulse-green 1s ease-in-out infinite alternate;
-}
-
-@keyframes pulse-green {
-  0% {
-    background-color: #28a745;
-  }
-  100% {
-    background-color: #46d646; 
-  }
-}
-
-.hourglass {
-  animation: rotate 5s linear infinite;
-  transform-origin: center;
-  display: inline-block;
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

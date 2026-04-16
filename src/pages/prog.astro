@@ -3,11 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import ConfProgram from '../components/ConfProgram.jsx';
 const pageTitle = "Программа конференции Проблемы теоретической и экспериментальной химии";
-import presentationObjects from '../components/Prog2025.json';
-import Schedule from '../components/Schedule2025.html';
+import presentationObjects from '../components/Prog2026.json';
+import Schedule from '../components/Schedule2026.html';
 ---
 
-<Layout title={pageTitle} archived={true}>
+<Layout title={pageTitle} archived={false}>
 
   <Navbar entries={{
     'На главную' : Astro.url.origin,
@@ -16,11 +16,11 @@ import Schedule from '../components/Schedule2025.html';
   }} sticky={true} withDots={false}/>
 
 	<main>
-    <section id="info"><p><strong><a href="https://insma.urfu.ru/fileadmin/user_upload/site_32133/IENiM/chem_ruten/2025/sbornik_2025_fin.pdf" target="_blank">Опубликованная версия сборника тезисов</a></strong> (pdf, 14.3 Mb).</p><p>Программа и расписание конференции на этой странице автоматически сгенерированы из актуального <a href="/docs/2025/Программа XXXV.docx">файла программы конференции</a>, поэтому информация в них абсолютно идентична. <a href="#presentations">Интерактивная часть</a> программы может не работать в совсем старых браузерах, но вы всегда сможете скачать файл. Настройки фильтра и отмеченные вами доклады сохранятся в вашем браузере, если вы не в режиме инкогнито. Желаем вам успешного участия в конференции!</p></section>
+    <!--section id="info"><p><strong><a href="https://insma.urfu.ru/fileadmin/user_upload/site_32133/IENiM/chem_ruten/2025/sbornik_2025_fin.pdf" target="_blank">Опубликованная версия сборника тезисов</a></strong> (pdf, 14.3 Mb).</p><p>Программа и расписание конференции на этой странице автоматически сгенерированы из актуального <a href="/docs/2025/Программа XXXV.docx">файла программы конференции</a>, поэтому информация в них абсолютно идентична. <a href="#presentations">Интерактивная часть</a> программы может не работать в совсем старых браузерах, но вы всегда сможете скачать файл. Настройки фильтра и отмеченные вами доклады сохранятся в вашем браузере, если вы не в режиме инкогнито. Желаем вам успешного участия в конференции!</p></section-->
     <section id="timetable"><Schedule /></section>
     <section id="presentations">
       <h1>Доклады</h1>
-      <ConfProgram client:load presentations={presentationObjects} />
+      <ConfProgram client:load staticProgram={presentationObjects} />
     </section>
 	</main>
 
