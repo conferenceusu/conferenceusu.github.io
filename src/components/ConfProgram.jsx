@@ -66,7 +66,7 @@ const timeFormatter = new Intl.DateTimeFormat('en-GB', {
 function PresentationCard({ presentation, checked, onCheck }) {
     const presentationClass = `presentation presentation--${presentation.type} presentation--section-${presentation.section}`;
     const checkboxID = presentation.id + '-checkbox';
-    const presentationLink = <a href={`/docs/2026/abstracts/${presentation.page.toString().padStart(3, '0')}.html`} target="_blank"><img src='/img/article_shortcut.svg' alt="Ссылка на тезисы доклада"></img></a>;
+    const presentationLink = <a href={`/docs/2026/abstracts/${presentation.page.toString().padStart(3, '0')}.html`} target="_blank"><img src='/img/article_shortcut.svg' alt="Ссылка на тезисы доклада" /></a>;
     let presentationNumberText = null;
     switch(presentation.type) {
         case 'plenary':
@@ -132,11 +132,12 @@ function PresentationCard({ presentation, checked, onCheck }) {
     );
 }
 
-function FilteredProgram({ presentations, filter, checkedPresentations, onCheckPresentation }) {
+function FilteredProgram({ presentations, filter, checkedPresentations, onCheckPresentation, isLive }) {
     const substring = filter.text.trim();
     const isSubstring = where => (where.toLowerCase().indexOf(substring) !== -1);
     const isSubstringOfHtml = where => (where.replace(/<[^>]*>/g, '').toLowerCase().indexOf(substring) !== -1);
     const shouldDisplay = a => (
+        (!isLive || !filter.current || a.status === 'current') &&
         (!filter.checked || checkedPresentations.includes(a.id)) &&
         (filter.section === -1 || filter.section === a.section) &&
         (
@@ -150,7 +151,7 @@ function FilteredProgram({ presentations, filter, checkedPresentations, onCheckP
     const filteredPresentations = useMemo(() => {
         //console.log('memo');
         return presentations.filter(shouldDisplay);
-    }, [presentations, filter]);
+    }, [presentations, filter, isLive]);
     let lastSection = null;
     let lastSubsection = null;
     return filteredPresentations.map(a => {
@@ -182,7 +183,8 @@ export default function ConfProgram({ staticProgram }) {
         section: -1,
         subsection: -1,
         type: "все",
-        checked: false
+        checked: false,
+        current: false
     };
     const [filter, setFilter] = useState(defaultFilter);
     const [checkedPresentations, setCheckedPresentations] = useState([]);
@@ -285,6 +287,12 @@ export default function ConfProgram({ staticProgram }) {
             checked : checked ? true : false
         });
     }
+    function handleFilterCurrent(checked) {
+        handleFilter({
+            ...filter,
+            current : checked ? true : false
+        });
+    }
     function handleCheckPresentation(checked, id) {
         const newCheckedPresentations = [...checkedPresentations];
         if (checked) {
@@ -341,15 +349,26 @@ export default function ConfProgram({ staticProgram }) {
                     <option value="extra">Заочные</option>
                 </select>
                 <span class="check filter-check">
-                    <label for="filter-check">Отображать только отмеченные</label>
+                    <label for="filter-check">Только отмеченные доклады</label>
                     <input type="checkbox"
                            id="filter-check"
                            name="filter-check"
                            checked={filter.checked}
                            onChange={e => handleFilterChecked(e.target.checked)} />
                 </span>
+                {isLive && 
+                <span class="check filter-check">
+                    <label for="filter-current">Только докладывающиеся сейчас</label>
+                    <input type="checkbox"
+                           id="filter-current"
+                           name="filter-current"
+                           checked={filter.current}
+                           onChange={e => handleFilterCurrent(e.target.checked)} />
+                </span>
+                }
             </div>
-            <FilteredProgram presentations={presentations}
+            <FilteredProgram isLive={isLive}
+                             presentations={presentations}
                              filter={filter}
                              checkedPresentations={checkedPresentations}
                              onCheckPresentation={handleCheckPresentation} />

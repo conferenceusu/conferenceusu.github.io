@@ -33,6 +33,10 @@
   align-self: flex-end;
 }
 
+.filter-check {
+  text-align: right;
+}
+
 .check > *:first-child {
   margin-right: 0.5rem;
 }
