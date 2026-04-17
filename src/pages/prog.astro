@@ -16,7 +16,10 @@ import Schedule from '../components/Schedule2026.html';
   }} sticky={true} withDots={false}/>
 
 	<main>
-    <!--section id="info"><p><strong><a href="https://insma.urfu.ru/fileadmin/user_upload/site_32133/IENiM/chem_ruten/2025/sbornik_2025_fin.pdf" target="_blank">Опубликованная версия сборника тезисов</a></strong> (pdf, 14.3 Mb).</p><p>Программа и расписание конференции на этой странице автоматически сгенерированы из актуального <a href="/docs/2025/Программа XXXV.docx">файла программы конференции</a>, поэтому информация в них абсолютно идентична. <a href="#presentations">Интерактивная часть</a> программы может не работать в совсем старых браузерах, но вы всегда сможете скачать файл. Настройки фильтра и отмеченные вами доклады сохранятся в вашем браузере, если вы не в режиме инкогнито. Желаем вам успешного участия в конференции!</p></section-->
+    <section id="info">
+      <!--p><strong><a href="https://insma.urfu.ru/fileadmin/user_upload/site_32133/IENiM/chem_ruten/2025/sbornik_2025_fin.pdf" target="_blank">Опубликованная версия сборника тезисов</a></strong> (pdf, 14.3 Mb).</p-->
+      <p>В <a href="#presentations">интерактивной программе</a> доступны тексты тезисов всех докладов в форматах html и pdf (нажимайте <img class="example-abstract-link" src='/img/article_shortcut.svg' alt="Пример ссылки на тезисы доклада" />). Во время проведения конференции мы планируем обновлять статусы пленарных и устных докладов, чтобы вы могли видеть в интерактивной программе, какие доклады 📅&nbsp;запланированы, ⏳&nbsp;докладываются в настоящее время или ✅&nbsp;уже состоялись. Настройки фильтра и отмеченные вами доклады сохранятся в вашем браузере, если вы не в режиме инкогнито. Программу и расписание можно также <a href="/docs/2026/Программа XXXVI.pdf">скачать в формате PDF</a>, а ссылку на полный текст сборника с выходными данными мы сделаем по факту официальной публикации сборника в Издательстве УрФУ. Желаем вам успешного участия в конференции!</p>
+    </section>
     <section id="timetable"><Schedule /></section>
     <section id="presentations">
       <h1>Доклады</h1>
@@ -56,10 +59,13 @@ import Schedule from '../components/Schedule2026.html';
     max-width: 780px;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding: 1.5rem 0.5rem;
   }
   #info {
     padding-bottom: 0;
+    padding-top: 0;
+  }
+  .example-abstract-link {
+    vertical-align: middle;
   }
 </style>
