@@ -176,7 +176,7 @@ function FilteredProgram({ presentations, filter, checkedPresentations, onCheckP
     });
 }
 
-export default function ConfProgram({ staticProgram }) {
+export default function ConfProgram({ staticProgram, interactiveFeaturesEnabled }) {
     const [presentations, setPresentations] = useState(staticProgram);
     const defaultFilter = {
         text: "",
@@ -240,8 +240,12 @@ export default function ConfProgram({ staticProgram }) {
         }
 
         const interval = (async () => {
-            const firstFetchResult = await fetchLiveStatuses();
-            return firstFetchResult ? setInterval(fetchLiveStatuses, 20000) : null;
+            if (interactiveFeaturesEnabled) {
+                const firstFetchResult = await fetchLiveStatuses();
+                return firstFetchResult ? setInterval(fetchLiveStatuses, 20000) : null;
+            } else {
+                return null;
+            }
         })();
        
         return () => {
